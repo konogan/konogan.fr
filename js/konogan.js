@@ -1,37 +1,27 @@
- $(function () {
+"use strict";
 
-     $(".rslides").responsiveSlides({
-         auto: false,
-         pager: true,
-         nav: true,
-         speed: 400,
-         maxwidth: 600,
-         namespace: "large-btns"
-     });
+function RandArray(array){
+  let rand = Math.random()*array.length | 0;
+  let rValue = array[rand];
+  return rValue;
+}
 
+(()=>{
 
-     $("a[href='#top']").click(function () {
-         $("html, body").animate({
-             scrollTop: 0
-         }, "slow");
-         return false;
-     });
+  const uls = document.querySelectorAll("ul");
+  console.log(uls);
 
+  uls.forEach((ulEl)=>{
+    const lis =[...ulEl.querySelectorAll('li')];
+    console.log(lis);
+    if (lis.length > 1) {
+      setTimeout(function () {
+        console.log("ici");
+        lis.map(liEl=>{liEl.style.display="none";});
+        let rEl = RandArray(lis);
+        rEl.style.display="block";
+      }, Math.floor(Math.random() * 10));
+    }
+  })
 
-     $('a[href*=#]:not([href=#])').on('click', function () {
-         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-         var target = $(this.hash);
-         target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-         console.log(target);
-
-         if (target.length) {
-             $('html,body').animate({
-                 scrollTop: target.offset().top
-             }, 1200);
-             return false;
-         }
-         }
-     });
-
-
- });
+})();
