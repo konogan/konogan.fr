@@ -6,22 +6,26 @@ function RandArray(array){
   return rValue;
 }
 
+
+function RandImgs(array){
+  array.map(liEl=>{liEl.style.display="none";});
+  let rEl = RandArray(array);
+  rEl.style.display="block";
+}
+
+
+
 (()=>{
-
   const uls = document.querySelectorAll("ul");
-  console.log(uls);
-
   uls.forEach((ulEl)=>{
-    const lis =[...ulEl.querySelectorAll('li')];
-    console.log(lis);
-    if (lis.length > 1) {
-      setTimeout(function () {
-        console.log("ici");
-        lis.map(liEl=>{liEl.style.display="none";});
-        let rEl = RandArray(lis);
-        rEl.style.display="block";
-      }, Math.floor(Math.random() * 10));
-    }
+    const lisEl = ulEl.querySelectorAll('li');
+    const lis =[...lisEl];
+    RandImgs(lis)
+    lisEl.forEach(liEl=>{
+      liEl.addEventListener('click',()=>{
+        RandImgs(lis)
+      })
+    })
   })
 
 })();
