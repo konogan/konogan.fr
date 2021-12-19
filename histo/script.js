@@ -63,7 +63,7 @@ function handleDeleteHistory(event) {
   let metadata = {
     cf_HistoriqueParutions: new_cf_HistoriqueParutions,
   };
-
+  console.log(metadata);
   //elvisApi.update(currentId, metadata);
 }
 
@@ -190,7 +190,7 @@ function updateSelection() {
 
 (async () => {
   try {
-    console.log("v121");
+    console.log("v122");
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
     elvisContext = await AssetsClientSdk.legacyElvisContext();
