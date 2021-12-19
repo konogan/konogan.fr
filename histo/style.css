@@ -19,6 +19,7 @@ body {
 h2 {
   color: rgb(0, 149, 224);
   font-weight: bold;
+  font-size: 16px;
 }
 
 fieldset {
@@ -47,4 +48,14 @@ input,
 select {
   order: 2;
   flex: 1 1 auto;
+}
+
+ul {
+  list-style-type: none;
+}
+
+
+.histoDel {
+  text-decoration: underline;
+  color: rgb(0, 149, 224);
 }

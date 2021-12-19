@@ -16,7 +16,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------109");
+  console.log("------init-------111");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -161,8 +161,8 @@ function updateSelection() {
   // listerners --------------------------------------------
   // on other parutions
   const deleteBtns = document.querySelectorAll(".histoDel");
-  for (const button of buttons) {
-    button.addEventListener("click", function (event) {
+  for (const deleteBtn of deleteBtns) {
+    deleteBtn.addEventListener("click", function (event) {
       event.preventDefault();
       event.stopPropagation();
       let histoToDel = event.target.id;
