@@ -99,6 +99,7 @@ function handleSubmitForm(event) {
     if (cf_HistoriqueParutions.includes(toHistoryToAdd)) {
       updateMsgInPanel(lang.historicAlreadySet);
     } else {
+      let new_cf_HistoriqueParutions = cf_HistoriqueParutions;
       new_cf_HistoriqueParutions.push(toHistoryToAdd);
       let metadata = {
         cf_HistoriqueParutions: new_cf_HistoriqueParutions,
@@ -208,7 +209,7 @@ function updateSelection() {
 
 (async () => {
   try {
-    console.log("Plugin Historique Parution v1.0.1");
+    console.log("Plugin Historique Parution v1.0.2");
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
     elvisContext = await AssetsClientSdk.legacyElvisContext();
