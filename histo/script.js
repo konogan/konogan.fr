@@ -4,7 +4,7 @@ let contextService;
 let hitsCount = 0;
 
 (async () => {
-  console.log("------init-------2");
+  console.log("------init-------3");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -35,6 +35,7 @@ function updateSelection() {
   console.log("----updateSelection-----");
 
   if (!elvisContext) {
+    console.log("elvisContext NOT FOUND");
     return;
   }
   let hits = elvisContext.activeTab.originalAssetSelection;
