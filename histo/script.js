@@ -14,7 +14,7 @@ let hitsCount = 0;
 })();
 
 function updateMsgInPanel(content = "") {
-  const panelMsg = document.querySelector(".panel #message");
+  const panelMsg = document.querySelector("#panel-message");
   if (panelMsg) {
     if (content === "") {
       panelMsg.innerHTML = ``;
@@ -22,7 +22,7 @@ function updateMsgInPanel(content = "") {
       panelMsg.innerHTML = `${content}`;
     }
   } else {
-    console.error("DEBUG : .panel #message NOT FOUND");
+    console.error("DEBUG : #message NOT FOUND");
   }
 }
 
