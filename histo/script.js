@@ -15,21 +15,6 @@ const publications = {
   ],
 };
 
-(async () => {
-  console.log("------init-------111");
-  try {
-    // use the old Elvis Context
-    // TODO pass on webpack with new context
-    elvisContext = await AssetsClientSdk.legacyElvisContext();
-    contextService = await window.AssetsClientSdk.AssetsPluginContext.get();
-    elvisApi = await AssetsClientSdk.legacyElvisAPI();
-    elvisContext.updateCallback = updateSelection;
-    updateSelection();
-  } catch (error) {
-    console.log(error);
-  }
-})();
-
 function isNumeric(value) {
   return /^-?\d+$/.test(value);
 }
@@ -58,55 +43,11 @@ function showForm() {
 }
 
 function updateSelection() {
-  console.log("----updateSelection-----");
-
   if (!elvisContext) {
     console.log("elvisContext NOT FOUND");
     return;
   }
-  let hits = elvisContext.activeTab.originalAssetSelection;
 
-  console.log("elvisContext", elvisContext);
-  console.log("elvisContext.hasSelection()", elvisContext.hasSelection());
-  console.log(
-    "elvisContext.hasFilteredSelection()",
-    elvisContext.hasFilteredSelection()
-  );
-
-  hitsCount = hits.length;
-
-  console.log("hitsCount", hitsCount);
-
-  if (hits.length > 1) {
-    updateMsgInPanel(lang.multipleSelection);
-    hideForm();
-    return;
-  } else if (hits.length == 0) {
-    updateMsgInPanel(lang.noSelection);
-    hideForm();
-    return;
-  } else {
-    updateMsgInPanel();
-    showForm();
-  }
-  const asset = hits[0];
-  const assetPath = asset.metadata.folderPath.split("/");
-  const fond = assetPath[1];
-  const ArchivesOrMedias = assetPath[2];
-  const AfterArchivesOrMedias = assetPath[3];
-  const assetDomain = asset.metadata.assetDomain;
-  const isImage = assetDomain === "image";
-  currentId = asset.id;
-
-  if (
-    ArchivesOrMedias !== "Medias" ||
-    AfterArchivesOrMedias !== "Originales" ||
-    !isImage
-  ) {
-    updateMsgInPanel(lang.onlyMediasImages);
-    hideForm();
-    return;
-  }
   // DOM Elements--------------------------------------------
   let DOM_content = document.querySelector("#histo-panel-content");
   let DOM_publicationSelect = document.querySelector(
@@ -125,16 +66,50 @@ function updateSelection() {
 
   let DOM_submitForm = document.querySelector("#histo-panel-form-add-submit");
 
+  // EMPTY PREVIOUS
+  DOM_content.innerHTML = "";
+  hideForm();
+
+  let hits = elvisContext.activeTab.originalAssetSelection;
+
+  if (hits.length > 1) {
+    updateMsgInPanel(lang.multipleSelection);
+
+    return;
+  } else if (hits.length == 0) {
+    updateMsgInPanel(lang.noSelection);
+    return;
+  } else {
+    updateMsgInPanel();
+    showForm();
+  }
+  const asset = hits[0];
+  const assetPath = asset.metadata.folderPath.split("/");
+  const fond = assetPath[1];
+  const ArchivesOrMedias = assetPath[2];
+  const AfterArchivesOrMedias = assetPath[3];
+  const assetDomain = asset.metadata.assetDomain;
+  const isImage = assetDomain === "image";
+
+  currentId = asset.id;
+
+  if (
+    ArchivesOrMedias !== "Medias" ||
+    AfterArchivesOrMedias !== "Originales" ||
+    !isImage
+  ) {
+    updateMsgInPanel(lang.onlyMediasImages);
+    hideForm();
+    return;
+  }
+
   // cf_HistoriqueParutions ------------------------------
   let cf_HistoriqueParutions = asset.metadata.cf_HistoriqueParutions;
 
   if (cf_HistoriqueParutions === undefined) {
     cf_HistoriqueParutions = [];
   }
-  // empty previous content
-  DOM_content.innerHTML = "";
 
-  // TODO display cf_HistoriqueParutions in FORM for delete
   if (cf_HistoriqueParutions.length > 0) {
     let ul = document.createElement("ul");
 
@@ -164,9 +139,19 @@ function updateSelection() {
   for (const deleteBtn of deleteBtns) {
     deleteBtn.addEventListener("click", function (event) {
       event.preventDefault();
-      event.stopPropagation();
       let histoToDel = event.target.id;
-      console.log(histoToDel);
+      let metadata = {
+        cf_HistoriqueParutions: cf_HistoriqueParutions.filter((hist) => {
+          hist !== histoToDel;
+        }),
+      };
+      elvisApi.update(currentId, metadata, () => {
+        // vider le formulaire
+        // refresh asset/panel
+        DOM_currentParution.value = "";
+        DOM_currentFolio.value = "";
+        updateSelection();
+      });
     });
   }
 
@@ -174,7 +159,6 @@ function updateSelection() {
   // on submit
   DOM_submitForm.addEventListener("click", (event) => {
     event.preventDefault();
-    event.stopPropagation();
 
     let currentPublication = DOM_currentPublication.value.trim();
     let currentParution = DOM_currentParution.value.trim();
@@ -214,3 +198,18 @@ function updateSelection() {
     }
   });
 }
+
+(async () => {
+  console.log("------init-------112");
+  try {
+    // use the old Elvis Context
+    // TODO REWORK on webpack with new context
+    elvisContext = await AssetsClientSdk.legacyElvisContext();
+    contextService = await window.AssetsClientSdk.AssetsPluginContext.get();
+    elvisApi = await AssetsClientSdk.legacyElvisAPI();
+    elvisContext.updateCallback = updateSelection;
+    updateSelection();
+  } catch (error) {
+    console.log(error);
+  }
+})();
