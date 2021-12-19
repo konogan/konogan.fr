@@ -137,11 +137,12 @@ function updateSelection() {
     let ul = document.createElement("ul");
 
     for (let h = 0; h < cf_HistoriqueParutions.length; h++) {
-      const histo = cf_HistoriqueParutions[h];
+      let histo = cf_HistoriqueParutions[h];
+      let histoBeauty = histo.split("#").join(" ");
       let li = document.createElement("li");
-      li.innerHTML = cf_HistoriqueParutions[i];
+      li.innerHTML = `${histoBeauty} <span id="${histo}" class='histo'>Supp.</span>`;
+      ul.appendChild(li);
     }
-
     DOM_content.appendChild(ul);
   }
 
@@ -157,7 +158,7 @@ function updateSelection() {
 
   // listerners --------------------------------------------
   // on other parutions
-
+  // TODO
   // on submit
   DOM_submitForm.addEventListener("click", (event) => {
     event.preventDefault();
