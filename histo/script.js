@@ -2,8 +2,8 @@ let elvisContext;
 let elvisApi;
 let contextService;
 let hitsCount = 0;
-let currentId=null;
-let cf_HistoriqueParutions=null;
+let currentId = null;
+let cf_HistoriqueParutions = null;
 
 const publications = {
   "Art et Décoration": ["Art et Décoration", "Art et Décoration Hors-Série"],
@@ -177,7 +177,7 @@ function updateSelection() {
 
 (async () => {
   try {
-    console.log("v117");
+    console.log("v118");
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
     elvisContext = await AssetsClientSdk.legacyElvisContext();
@@ -203,10 +203,10 @@ function updateSelection() {
       "#histo-panel-form-add-folio"
     );
     let DOM_submitForm = document.querySelector("#histo-panel-form-add-submit");
+    DOM_submitForm.removeEventListener("click", handleSubmitForm);
     DOM_submitForm.addEventListener("click", handleSubmitForm);
 
     updateSelection();
-
   } catch (error) {
     console.log(`DEBUG : ${error}`);
   }
