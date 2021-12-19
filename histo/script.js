@@ -16,7 +16,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------105");
+  console.log("------init-------106");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -159,7 +159,6 @@ function updateSelection() {
       //TODO
       // verifier que la string généré n'est pas dans la liste des hostorique de parution de l'asset selectionné
       let toHistoryToAdd = `${currentPublication}#${currentParution}#${currentEdition}#${currentFolio}`;
-      console.log(toHistoryToAdd);
       if (cf_HistoriqueParutions.includes(toHistoryToAdd)) {
         updateMsgInPanel(lang.historicAlreadySet);
       } else {
@@ -168,7 +167,7 @@ function updateSelection() {
           cf_HistoriqueParutions: cf_HistoriqueParutions,
         };
         console.log(metadata);
-        //elvisApi.update(currentId, metadata);
+        elvisApi.update(currentId, metadata);
       }
 
       // si pas dans la liste l'ajouter à la liste
