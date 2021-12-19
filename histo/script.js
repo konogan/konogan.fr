@@ -50,20 +50,27 @@ function updateSelection() {
 
   if (hits.length > 1) {
     updateMsgInPanel(lang.multipleSelection);
+    return;
   } else if (hits.length == 0) {
     updateMsgInPanel(lang.noSelection);
+    return;
   } else {
     updateMsgInPanel();
   }
-  //     var asset = hits[0];
-  //     var folderPathArray = asset.metadata.folderPath.split("/");
-  //     let assetFond = folderPathArray[1];
-  //     let secondFolder = folderPathArray[2];
-  //     let thirdFolder = folderPathArray[3];
+  const asset = hits[0];
+  const assetPath = asset.metadata.folderPath.split("/");
+  const fond = assetPath[1];
+  const ArchivesOrMedias = assetPath[2];
+  const assetDomain = asset.metadata.assetDomain;
+  const isImage = assetDomain === "image";
 
-  //     var assetDomain = asset.metadata.assetDomain;
-  //     var pageRange = asset.metadata.pageRange;
-  //     var isImage = assetDomain === "image";
+  if (ArchivesOrMedias !== "Medias" || !isImage) {
+    updateMsgInPanel(lang.noSelection);
+    return;
+  }
+
+  console.log("asset.metadata", asset.metadata);
+
   //     var title = isImage ? lang.pdfTitle : lang.imgTitle;
 
   //     var pdfPromiseResolve;
