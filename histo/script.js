@@ -106,6 +106,8 @@ function updateSelection() {
   // cf_HistoriqueParutions ------------------------------
   let cf_HistoriqueParutions = asset.metadata.cf_HistoriqueParutions;
 
+  console.log("cf_HistoriqueParutions",cf_HistoriqueParutions, typeof cf_HistoriqueParutions);
+
   if (cf_HistoriqueParutions === undefined) {
     cf_HistoriqueParutions = [];
   }
@@ -195,7 +197,7 @@ function updateSelection() {
 }
 
 (async () => {
-  console.log("------init-------113");
+  console.log("------init-------114");
   try {
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
