@@ -103,20 +103,27 @@ function updateSelection() {
     return;
   }
 
-
-
-  console.log("assetPath", assetPath);
-  console.log("asset.metadata", asset.metadata);
+  // console.log("assetPath", assetPath);
+  // console.log("asset.metadata", asset.metadata);
 
   // display cf_HistoriqueParutions in FORM
-
   console.log("cf_HistoriqueParutions", asset.metadata.cf_HistoriqueParutions);
+
+  // TODO
+
 
   // list all publications from the same Fond
   // for the moment is a config files
   // TODO with new API query folders of asset "fond"
-  console.log(fond);
-  console.log(publications[fond]);
+    let publicationSelect = document.querySelector("#histo-panel-form-add-publication");
+  for (let p = 0; p < publications[fond].length; p++) {
+    const publication = publications[fond][p];
+    publicationSelect.add(new Option(publication, publication));
+  }
+
+
+  
+
 
   // initlistener on form
 

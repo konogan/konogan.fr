@@ -1,37 +1,15 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0px;
+  margin: 0px;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: #777;
 }
 
-#panel-container {
-    padding: 11px 20px;
-}
-
-#panel-messages a {
-    text-decoration: none;
-    color: rgb(85, 85, 85);
-}
-#panel-messages a:hover {
-    color: rgb(0, 149, 224);
-}
-
-.panel {
-    padding: 0px;
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-    font-family: sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: #777;
-}
-.error-text {
-    font-family: sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: #777;
+h2 {
+  color: rgb(0, 149, 224);
+  font-weight: bold;
 }
