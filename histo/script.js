@@ -13,17 +13,21 @@ let hitsCount = 0;
 
 function updateMsgInPanel(content = "") {
   const panelMsg = document.querySelector("#panel-histo");
-  if (content === "") {
-    panelMsg.classList.remove("message");
-    panelMsg.innerHTML = ``;
-  } else {
-    panelMsg.classList.add("message");
-    panelMsg.innerHTML = `
+  if (panelMsg) {
+    if (content === "") {
+      panelMsg.classList.remove("message");
+      panelMsg.innerHTML = ``;
+    } else {
+      panelMsg.classList.add("message");
+      panelMsg.innerHTML = `
                 <h5>${lang.wrongSelectionTitle}</h5>
                 <div class='error-text'>
                     ${content}
                 </div>
             `;
+    }
+  } else {
+    console.error("panel-histo not found");
   }
 }
 
@@ -33,13 +37,16 @@ function updateSelection() {
   }
   let hits = elvisContext.activeTab.originalAssetSelection;
 
-  console.log(elvisContext);
-  console.log(elvisContext.hasSelection());
-  console.log(elvisContext.hasFilteredSelection());
+  console.log("elvisContext", elvisContext);
+  console.log("elvisContext.hasSelection()", elvisContext.hasSelection());
+  console.log(
+    "elvisContext.hasFilteredSelection()",
+    elvisContext.hasFilteredSelection()
+  );
 
   hitsCount = hits.length;
 
-  console.log(hitsCount);
+  console.log("hitsCount", hitsCount);
 
   if (hits.length > 1) {
     updateMsgInPanel(lang.multipleSelection);
