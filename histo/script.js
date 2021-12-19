@@ -68,6 +68,8 @@ function updateSelection() {
 
   // EMPTY PREVIOUS INSTANCES OF PANEL-------------------------
   DOM_content.innerHTML = "";
+  DOM_publicationSelect.innerHTML="";
+  
   hideForm();
   
   // WORK ON SELECTED ASSET------------------------------------
@@ -195,6 +197,7 @@ function updateSelection() {
 
 (async () => {
   try {
+    console.log("v116");
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
     elvisContext = await AssetsClientSdk.legacyElvisContext();

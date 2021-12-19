@@ -59,3 +59,7 @@ ul {
   color: rgb(0, 149, 224);
   cursor: pointer;
 }
+
+#histo-panel-content {
+  margin-bottom: 2em;
+}
