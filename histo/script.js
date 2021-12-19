@@ -5,7 +5,7 @@ let hitsCount = 0;
 
 const publications = {
   "Art et Décoration": ["Art et Décoration", "Art et Décoration Hors-Série"],
-  "Elle": ["Elle", "Elle Hors-Série", "Elle Hors-Série Icône"],
+  Elle: ["Elle", "Elle Hors-Série", "Elle Hors-Série Icône"],
   "Elle à Table": ["Elle à Table", "Elle à Table Hors-Série"],
   "Elle Décoration": [
     "Elle Décoration",
@@ -15,7 +15,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------6");
+  console.log("------init-------7");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -42,15 +42,22 @@ function updateMsgInPanel(content = "") {
   }
 }
 
-
 function hideForm() {
   const panelFormDiv = document.querySelector("#histo-panel-form-add");
-  panelFormDiv.style.display="none";
+  panelFormDiv.style.display = "none";
 }
 
 function showForm() {
   const panelFormDiv = document.querySelector("#histo-panel-form-add");
-  panelFormDiv.style.display="block";
+  panelFormDiv.style.display = "block";
+}
+
+function submitHisto(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  const formData = new FormData(event.target);
+  const formProps = Object.fromEntries(formData);
+  console.log(formProps);
 }
 
 function updateSelection() {
@@ -111,19 +118,20 @@ function updateSelection() {
 
   // TODO
 
-
   // list all publications from the same Fond
   // for the moment is a config files
   // TODO with new API query folders of asset "fond"
-    let publicationSelect = document.querySelector("#histo-panel-form-add-publication");
+  let publicationSelect = document.querySelector(
+    "#histo-panel-form-add-publication"
+  );
   for (let p = 0; p < publications[fond].length; p++) {
     const publication = publications[fond][p];
     publicationSelect.add(new Option(publication, publication));
   }
 
-
-
-
+  // listerner on submit
+  let submitForm = document.querySelector("#histo-panel-form-add-submit");
+  submitForm.addEventListener("submit", submitHisto);
 
   // initlistener on form
 
