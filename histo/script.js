@@ -65,12 +65,11 @@ function handleDeleteHistory(event) {
   if (new_cf_HistoriqueParutions.length === 0) {
     // si ZERO  historique de parution il faut supprimuer les autres metadonnnes de Publication
     // publicationName,edition pageRange,issueName
-    if (new_cf_HistoriqueParutions.length === 1) {
-      metadata["publicationName"] = "";
-      metadata["issueName"] = "";
-      metadata["edition"] = "";
-      metadata["pageRange"] = "";
-    }
+    //To clear the value for a metadata field, pass an empty string for that field.
+    metadata["publicationName"] = "";
+    metadata["issueName"] = "";
+    metadata["edition"] = "";
+    metadata["pageRange"] = "";
   }
 
   elvisApi.update(currentId, metadata);
@@ -209,7 +208,7 @@ function updateSelection() {
 
 (async () => {
   try {
-    console.log("Plugin Historique Parution v1.0.2");
+    console.log("Plugin Historique Parution v1.0.3");
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
     elvisContext = await AssetsClientSdk.legacyElvisContext();
