@@ -5,25 +5,13 @@ let hitsCount = 0;
 
 (async () => {
   console.log("------init-------2");
-  // elvisContext = await AssetsClientSdk.legacyElvisContext();
-  // contextService = await window.AssetsClientSdk.AssetsPluginContext.get();
-  // elvisApi = await AssetsClientSdk.legacyElvisAPI();
-  // elvisContext.updateCallback = updateSelection;
   try {
-    const contextService = await window.AssetsClientSdk.AssetsPluginContext.get(
-      ["https://cmisandbox-dam.eos-emea.woodwing.cloud/"]
-    );
-    console.log("contextService", contextService);
-
-    const apiClient =
-      await window.AssetsClientSdk.AssetsApiClient.fromPluginContext(
-        contextService
-      );
-    console.log("apiClient", apiClient);
-
-    contextService.updateCallback = updateSelection;
-    console.log("ici");
-
+    // use the old Elvis Context
+    // TODO pass on webpack with new context
+    elvisContext = await AssetsClientSdk.legacyElvisContext();
+    contextService = await window.AssetsClientSdk.AssetsPluginContext.get();
+    elvisApi = await AssetsClientSdk.legacyElvisAPI();
+    elvisContext.updateCallback = updateSelection;
     updateSelection();
   } catch (error) {
     console.log(error);
@@ -31,7 +19,7 @@ let hitsCount = 0;
 })();
 
 function updateMsgInPanel(content = "") {
-  const panelMsg = document.querySelector("#panel-message");
+  const panelMsg = document.querySelector("#histo-panel-message");
   if (panelMsg) {
     if (content === "") {
       panelMsg.innerHTML = ``;
@@ -96,6 +84,11 @@ function updateSelection() {
   console.log("cf_HistoriqueParutions", asset.metadata.cf_HistoriqueParutions);
 
   // list all publications from the same Fond
+  // for the moment is a config files
+  // TODO with new API query folders of asset "fond"
+
+  console.log(publications[fond]);
+
 
   // initlistener on form
 
