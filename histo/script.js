@@ -66,10 +66,11 @@ function updateSelection() {
 
   let DOM_submitForm = document.querySelector("#histo-panel-form-add-submit");
 
-  // EMPTY PREVIOUS
+  // EMPTY PREVIOUS INSTANCES OF PANEL-------------------------
   DOM_content.innerHTML = "";
   hideForm();
-
+  
+  // WORK ON SELECTED ASSET------------------------------------
   let hits = elvisContext.activeTab.originalAssetSelection;
 
   if (hits.length > 1) {
@@ -106,9 +107,7 @@ function updateSelection() {
   // cf_HistoriqueParutions ------------------------------
   let cf_HistoriqueParutions = asset.metadata.cf_HistoriqueParutions;
 
-  console.log("cf_HistoriqueParutions",cf_HistoriqueParutions, typeof cf_HistoriqueParutions);
-
-  if (cf_HistoriqueParutions === undefined) {
+  if (cf_HistoriqueParutions === undefined || cf_HistoriqueParutions === null) {
     cf_HistoriqueParutions = [];
   }
 
@@ -147,12 +146,10 @@ function updateSelection() {
           hist !== histoToDel;
         }),
       };
-      console.log(metadata);
       elvisApi.update(currentId, metadata);
     });
   }
 
-  // TODO
   // on submit
   DOM_submitForm.addEventListener("click", (event) => {
     event.preventDefault();
@@ -197,7 +194,6 @@ function updateSelection() {
 }
 
 (async () => {
-  console.log("------init-------114");
   try {
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
@@ -207,6 +203,6 @@ function updateSelection() {
     elvisContext.updateCallback = updateSelection;
     updateSelection();
   } catch (error) {
-    console.log(error);
+    console.log(`DEBUG : ${error}`);
   }
 })();
