@@ -12,12 +12,12 @@ let hitsCount = 0;
 
   const contextService = await window.AssetsClientSdk.AssetsPluginContext.get(['https://cmisandbox-dam.eos-emea.woodwing.cloud/']);
   const apiClient = await window.AssetsClientSdk.AssetsApiClient.fromPluginContext(contextService);
-  //contextService.updateCallback = updateSelection;
+  contextService.updateCallback = updateSelection;
   
-  console.log(contextService);
-  console.log(apiClient);
+  console.log("contextService",contextService);
+  console.log("apiClient",apiClient);
 
-  //updateSelection();
+  updateSelection();
 })();
 
 function updateMsgInPanel(content = "") {
