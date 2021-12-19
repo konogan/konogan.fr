@@ -15,7 +15,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------7");
+  console.log("------init-------79");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -50,14 +50,6 @@ function hideForm() {
 function showForm() {
   const panelFormDiv = document.querySelector("#histo-panel-form-add");
   panelFormDiv.style.display = "block";
-}
-
-function submitHisto(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  const formData = new FormData(event.target);
-  const formProps = Object.fromEntries(formData);
-  console.log(formProps);
 }
 
 function updateSelection() {
@@ -131,7 +123,46 @@ function updateSelection() {
 
   // listerner on submit
   let submitForm = document.querySelector("#histo-panel-form-add-submit");
-  submitForm.addEventListener("submit", submitHisto);
+  submitForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    let currentPublication = document
+      .querySelector("#histo-panel-form-add-publication")
+      .ariaValueMax.trim();
+    let currentParution = document
+      .querySelector("#histo-panel-form-add-parution")
+      .ariaValueMax.trim();
+    let currentEdition = document
+      .querySelector("#histo-panel-form-add-edition")
+      .ariaValueMax.trim();
+    let currentFolio = document
+      .querySelector("#histo-panel-form-add-folio")
+      .ariaValueMax.trim();
+
+    if (
+      currentPublication !== "" &&
+      currentParution !== "" &&
+      currentEdition !== "" &&
+      currentFolio !== ""
+    ) {
+      console.log(
+        "CHOOSE",
+        currentPublication,
+        currentParution,
+        currentEdition,
+        currentFolio
+      );
+    } else {
+      console.log(
+        "ERREUR",
+        currentPublication,
+        currentParution,
+        currentEdition,
+        currentFolio
+      );
+    }
+  });
 
   // initlistener on form
 
