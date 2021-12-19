@@ -9,19 +9,25 @@ let hitsCount = 0;
   // contextService = await window.AssetsClientSdk.AssetsPluginContext.get();
   // elvisApi = await AssetsClientSdk.legacyElvisAPI();
   // elvisContext.updateCallback = updateSelection;
+  try {
+    const contextService = await window.AssetsClientSdk.AssetsPluginContext.get(
+      ["https://cmisandbox-dam.eos-emea.woodwing.cloud/"]
+    );
+    console.log("contextService", contextService);
 
-  const contextService = await window.AssetsClientSdk.AssetsPluginContext.get(['https://cmisandbox-dam.eos-emea.woodwing.cloud/']);
-  console.log("contextService",contextService);
+    const apiClient =
+      await window.AssetsClientSdk.AssetsApiClient.fromPluginContext(
+        contextService
+      );
+    console.log("apiClient", apiClient);
 
-  const apiClient = await window.AssetsClientSdk.AssetsApiClient.fromPluginContext(contextService);
-  console.log("apiClient",apiClient);
+    contextService.updateCallback = updateSelection;
+    console.log("ici");
 
-  contextService.updateCallback = updateSelection;
-  console.log("ici");
-  
-  
-
-  updateSelection();
+    updateSelection();
+  } catch (error) {
+    console.log(error);
+  }
 })();
 
 function updateMsgInPanel(content = "") {
@@ -73,7 +79,11 @@ function updateSelection() {
   const assetDomain = asset.metadata.assetDomain;
   const isImage = assetDomain === "image";
 
-  if (ArchivesOrMedias !== "Medias" ||  AfterArchivesOrMedias!=="Originales" || !isImage) {
+  if (
+    ArchivesOrMedias !== "Medias" ||
+    AfterArchivesOrMedias !== "Originales" ||
+    !isImage
+  ) {
     updateMsgInPanel(lang.onlyMediasImages);
     return;
   }
@@ -85,11 +95,7 @@ function updateSelection() {
 
   console.log("cf_HistoriqueParutions", asset.metadata.cf_HistoriqueParutions);
 
-
   // list all publications from the same Fond
-
-
-
 
   // initlistener on form
 
