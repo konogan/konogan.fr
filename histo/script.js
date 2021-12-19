@@ -4,6 +4,12 @@ let contextService;
 let hitsCount = 0;
 let currentId = null;
 let cf_HistoriqueParutions = null;
+let DOM_content;
+let DOM_currentPublication;
+let DOM_currentParution;
+let DOM_currentEdition;
+let DOM_currentFolio;
+let DOM_submitForm;
 
 const publications = {
   "Art et Décoration": ["Art et Décoration", "Art et Décoration Hors-Série"],
@@ -177,7 +183,7 @@ function updateSelection() {
 
 (async () => {
   try {
-    console.log("v118");
+    console.log("v119");
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
     elvisContext = await AssetsClientSdk.legacyElvisContext();
@@ -186,24 +192,28 @@ function updateSelection() {
     elvisContext.updateCallback = updateSelection;
 
     // INIT--------------------------------------------
-    let DOM_content = document.querySelector("#histo-panel-content");
-    let DOM_publicationSelect = document.querySelector(
+    DOM_content = document.querySelector("#histo-panel-content");
+    DOM_publicationSelect = document.querySelector(
       "#histo-panel-form-add-publication"
     );
-    let DOM_currentPublication = document.querySelector(
+    DOM_currentPublication = document.querySelector(
       "#histo-panel-form-add-publication"
     );
-    let DOM_currentParution = document.querySelector(
+    DOM_currentParution = document.querySelector(
       "#histo-panel-form-add-parution"
     );
-    let DOM_currentEdition = document.querySelector(
+    DOM_currentEdition = document.querySelector(
       "#histo-panel-form-add-edition"
     );
-    let DOM_currentFolio = document.querySelector(
-      "#histo-panel-form-add-folio"
-    );
-    let DOM_submitForm = document.querySelector("#histo-panel-form-add-submit");
-    DOM_submitForm.removeEventListener("click", handleSubmitForm);
+    DOM_currentFolio = document.querySelector("#histo-panel-form-add-folio");
+
+    DOM_submitForm = document.querySelector("#histo-panel-form-add-submit");
+    try {
+      DOM_submitForm.removeEventListener("click", handleSubmitForm);
+    } catch (error) {
+      console.log("ici");
+    }
+
     DOM_submitForm.addEventListener("click", handleSubmitForm);
 
     updateSelection();
