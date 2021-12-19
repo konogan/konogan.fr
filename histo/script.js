@@ -2,6 +2,7 @@ let elvisContext;
 let elvisApi;
 let contextService;
 let hitsCount = 0;
+let currentId;
 
 const publications = {
   "Art et Décoration": ["Art et Décoration", "Art et Décoration Hors-Série"],
@@ -15,7 +16,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------101");
+  console.log("------init-------102");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -95,6 +96,7 @@ function updateSelection() {
   const AfterArchivesOrMedias = assetPath[3];
   const assetDomain = asset.metadata.assetDomain;
   const isImage = assetDomain === "image";
+  currentId = asset.id;
 
   if (
     ArchivesOrMedias !== "Medias" ||
@@ -112,12 +114,15 @@ function updateSelection() {
   // display cf_HistoriqueParutions in FORM
   // TODO
   let cf_HistoriqueParutions = asset.metadata.cf_HistoriqueParutions;
-  console.log("cf_HistoriqueParutions", cf_HistoriqueParutions);
-  console.log(
-    "cf_HistoriqueParutions.split(',')",
-    cf_HistoriqueParutions.split[","]
-  );
+  let cf_HistoriqueParutionsArray;
+  if (cf_HistoriqueParutions.trim() !== "") {
+    cf_HistoriqueParutionsArray = cf_HistoriqueParutions.split(",");
+  } else {
+    cf_HistoriqueParutionsArray = [];
+  }
 
+  console.log("cf_HistoriqueParutions", cf_HistoriqueParutions);
+  console.log("cf_HistoriqueParutionsArray", cf_HistoriqueParutionsArray);
 
   // list all publications from the same Fond
   // for the moment is a config files
@@ -129,7 +134,6 @@ function updateSelection() {
     const publication = publications[fond][p];
     publicationSelect.add(new Option(publication, publication));
   }
-
 
   // listerner on submit
   let submitForm = document.querySelector("#histo-panel-form-add-submit");
@@ -161,19 +165,22 @@ function updateSelection() {
       // verifier que la string généré n'est pas dans la liste des hostorique de parution de l'asset selectionné
       let toHistoryToAdd = `${currentPublication}#${currentParution}#${currentEdition}#${currentFolio}`;
       console.log(toHistoryToAdd);
+      if (cf_HistoriqueParutionsArray.includes(toHistoryToAdd)) {
+        updateMsgInPanel(lang.historicAlreadySet);
+      } else {
+        cf_HistoriqueParutionsArray.push(toHistoryToAdd);
+        let metadata = {
+          cf_HistoriqueParutions: cf_HistoriqueParutionsArray.concat(","),
+        };
+        console.log(metadata);
+        //elvisApi.update(currentId, metadata);
+      }
+
       // si pas dans la liste l'ajouter à la liste
-
       // resoummetre la liste à ASSETS
-
       // update(id: string, metadata: {}, successHandler?: any): void
-
-      console.log(
-        "CHOOSE",
-        currentPublication,
-        currentParution,
-        currentEdition,
-        currentFolio
-      );
+      // vider le formulaire
+      // refresh asset/panel
     } else {
       updateMsgInPanel(lang.setValidContext);
     }
