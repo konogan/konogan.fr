@@ -61,6 +61,18 @@ function handleDeleteHistory(event) {
   let metadata = {
     cf_HistoriqueParutions: new_cf_HistoriqueParutions,
   };
+
+  if (new_cf_HistoriqueParutions.length === 0) {
+    // si ZERO  historique de parution il faut supprimuer les autres metadonnnes de Publication
+    // publicationName,edition pageRange,issueName
+    if (new_cf_HistoriqueParutions.length === 1) {
+      metadata["publicationName"] = "";
+      metadata["issueName"] = "";
+      metadata["edition"] = "";
+      metadata["pageRange"] = "";
+    }
+  }
+
   elvisApi.update(currentId, metadata);
 }
 
@@ -87,10 +99,19 @@ function handleSubmitForm(event) {
     if (cf_HistoriqueParutions.includes(toHistoryToAdd)) {
       updateMsgInPanel(lang.historicAlreadySet);
     } else {
-      cf_HistoriqueParutions.push(toHistoryToAdd);
+      new_cf_HistoriqueParutions.push(toHistoryToAdd);
       let metadata = {
-        cf_HistoriqueParutions: cf_HistoriqueParutions,
+        cf_HistoriqueParutions: new_cf_HistoriqueParutions,
       };
+      // si UN seul historique de parution il faut definir les autres metadonnnes
+      // publicationName,edition pageRange,issueName
+      if (new_cf_HistoriqueParutions.length === 1) {
+        metadata["publicationName"] = currentPublication;
+        metadata["issueName"] = currentParution;
+        metadata["edition"] = currentEdition;
+        metadata["pageRange"] = currentFolio;
+      }
+
       elvisApi.update(currentId, metadata, () => {
         // vider le formulaire
         DOM_currentParution.value = "";
@@ -187,7 +208,7 @@ function updateSelection() {
 
 (async () => {
   try {
-    console.log("Plugin Historique Parution v1.0.0");
+    console.log("Plugin Historique Parution v1.0.1");
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
     elvisContext = await AssetsClientSdk.legacyElvisContext();
