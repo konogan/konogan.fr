@@ -3,8 +3,19 @@ let elvisApi;
 let contextService;
 let hitsCount = 0;
 
+const publications = {
+  "Art et Décoration": ["Art et Décoration", "Art et Décoration Hors-Série"],
+  "Elle": ["Elle", "Elle Hors-Série", "Elle Hors-Série Icône"],
+  "Elle à Table": ["Elle à Table", "Elle à Table Hors-Série"],
+  "Elle Décoration": [
+    "Elle Décoration",
+    "Elle Décoration Hors-Série",
+    "Elle Décoration Hors-Série Inspirations",
+  ],
+};
+
 (async () => {
-  console.log("------init-------3");
+  console.log("------init-------4");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -31,6 +42,17 @@ function updateMsgInPanel(content = "") {
   }
 }
 
+
+function hideForm() {
+  const panelFormDiv = document.querySelector("#histo-panel-form-add");
+  panelFormDiv.style.display="none";
+}
+
+function showForm() {
+  const panelFormDiv = document.querySelector("#histo-panel-form-add");
+  panelFormDiv.style.display="block";
+}
+
 function updateSelection() {
   console.log("----updateSelection-----");
 
@@ -53,12 +75,15 @@ function updateSelection() {
 
   if (hits.length > 1) {
     updateMsgInPanel(lang.multipleSelection);
+    hideForm();
     return;
   } else if (hits.length == 0) {
     updateMsgInPanel(lang.noSelection);
+    hideForm();
     return;
   } else {
     updateMsgInPanel();
+    showForm();
   }
   const asset = hits[0];
   const assetPath = asset.metadata.folderPath.split("/");
@@ -74,8 +99,11 @@ function updateSelection() {
     !isImage
   ) {
     updateMsgInPanel(lang.onlyMediasImages);
+    hideForm();
     return;
   }
+
+
 
   console.log("assetPath", assetPath);
   console.log("asset.metadata", asset.metadata);
@@ -87,9 +115,8 @@ function updateSelection() {
   // list all publications from the same Fond
   // for the moment is a config files
   // TODO with new API query folders of asset "fond"
-
+  console.log(fond);
   console.log(publications[fond]);
-
 
   // initlistener on form
 
