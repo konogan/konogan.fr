@@ -16,7 +16,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------103");
+  console.log("------init-------104");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -113,14 +113,15 @@ function updateSelection() {
 
   let cf_HistoriqueParutions = asset.metadata.cf_HistoriqueParutions;
   let cf_HistoriqueParutionsArray;
-  if (cf_HistoriqueParutions !== "") {
+
+  console.log("cf_HistoriqueParutions", cf_HistoriqueParutions);
+  if (cf_HistoriqueParutions !== "" && cf_HistoriqueParutions.length > 0) {
     cf_HistoriqueParutionsArray = cf_HistoriqueParutions.split(",");
   } else {
     cf_HistoriqueParutionsArray = [];
   }
   // TODO display cf_HistoriqueParutions in FORM for delete
 
-  console.log("cf_HistoriqueParutions", cf_HistoriqueParutions);
   console.log("cf_HistoriqueParutionsArray", cf_HistoriqueParutionsArray);
 
   // list all publications from the same Fond
