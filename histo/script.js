@@ -16,7 +16,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------107");
+  console.log("------init-------109");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -131,6 +131,8 @@ function updateSelection() {
   if (cf_HistoriqueParutions === undefined) {
     cf_HistoriqueParutions = [];
   }
+  // empty previous content
+  DOM_content.innerHTML = "";
 
   // TODO display cf_HistoriqueParutions in FORM for delete
   if (cf_HistoriqueParutions.length > 0) {
@@ -140,7 +142,7 @@ function updateSelection() {
       let histo = cf_HistoriqueParutions[h];
       let histoBeauty = histo.split("#").join(" ");
       let li = document.createElement("li");
-      li.innerHTML = `${histoBeauty} <span id="${histo}" class='histo'>Supp.</span>`;
+      li.innerHTML = `${histoBeauty} <span id="${histo}" class='histoDel'>Supp.</span>`;
       ul.appendChild(li);
     }
     DOM_content.appendChild(ul);
@@ -158,6 +160,16 @@ function updateSelection() {
 
   // listerners --------------------------------------------
   // on other parutions
+  const deleteBtns = document.querySelectorAll(".histoDel");
+  for (const button of buttons) {
+    button.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      let histoToDel = event.target.id;
+      console.log(histoToDel);
+    });
+  }
+
   // TODO
   // on submit
   DOM_submitForm.addEventListener("click", (event) => {
