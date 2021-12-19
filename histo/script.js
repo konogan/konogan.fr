@@ -54,16 +54,16 @@ function handleDeleteHistory(event) {
   console.log("BEFORE DEL", cf_HistoriqueParutions);
 
   let histoToDel = event.target.id;
-  let new_cf_HistoriqueParutions = cf_HistoriqueParutions.filter((hist) => {
-    hist !== histoToDel;
-  });
-  console.log(new_cf_HistoriqueParutions);
+  console.log(histoToDel);
+
+  let new_cf_HistoriqueParutions = cf_HistoriqueParutions.filter(
+    (hist) => hist !== histoToDel
+  );
 
   let metadata = {
     cf_HistoriqueParutions: new_cf_HistoriqueParutions,
   };
 
-  console.log(metadata);
   //elvisApi.update(currentId, metadata);
 }
 
@@ -190,7 +190,7 @@ function updateSelection() {
 
 (async () => {
   try {
-    console.log("v120");
+    console.log("v121");
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
     elvisContext = await AssetsClientSdk.legacyElvisContext();
