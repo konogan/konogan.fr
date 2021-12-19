@@ -15,7 +15,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------5");
+  console.log("------init-------6");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
