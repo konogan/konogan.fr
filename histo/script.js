@@ -12,22 +12,15 @@ let hitsCount = 0;
 })();
 
 function updateMsgInPanel(content = "") {
-  const panelMsg = document.querySelector("#panel-histo");
+  const panelMsg = document.querySelector(".panel #message");
   if (panelMsg) {
     if (content === "") {
-      panelMsg.classList.remove("message");
       panelMsg.innerHTML = ``;
     } else {
-      panelMsg.classList.add("message");
-      panelMsg.innerHTML = `
-                <h5>${lang.wrongSelectionTitle}</h5>
-                <div class='error-text'>
-                    ${content}
-                </div>
-            `;
+      panelMsg.innerHTML = `${content}`;
     }
   } else {
-    console.error("panel-histo not found");
+    console.error("DEBUG : .panel #message NOT FOUND");
   }
 }
 
@@ -37,16 +30,16 @@ function updateSelection() {
   }
   let hits = elvisContext.activeTab.originalAssetSelection;
 
-  console.log("elvisContext", elvisContext);
-  console.log("elvisContext.hasSelection()", elvisContext.hasSelection());
-  console.log(
+  console.debug("elvisContext", elvisContext);
+  console.debug("elvisContext.hasSelection()", elvisContext.hasSelection());
+  console.debug(
     "elvisContext.hasFilteredSelection()",
     elvisContext.hasFilteredSelection()
   );
 
   hitsCount = hits.length;
 
-  console.log("hitsCount", hitsCount);
+  console.debug("hitsCount", hitsCount);
 
   if (hits.length > 1) {
     updateMsgInPanel(lang.multipleSelection);
@@ -65,11 +58,18 @@ function updateSelection() {
   const isImage = assetDomain === "image";
 
   if (ArchivesOrMedias !== "Medias" || !isImage) {
-    updateMsgInPanel(lang.noSelection);
+    updateMsgInPanel(lang.onlyMediasImages);
     return;
   }
 
-  console.log("asset.metadata", asset.metadata);
+  console.debug("assetPath", assetPath);
+  console.debug("asset.metadata", asset.metadata);
+
+  // display cf_HistoriqueParutions in FORM
+
+  console.debug("cf_HistoriqueParutions", asset.metadata.cf_HistoriqueParutions);
+
+  // initlistener on form
 
   //     var title = isImage ? lang.pdfTitle : lang.imgTitle;
 
