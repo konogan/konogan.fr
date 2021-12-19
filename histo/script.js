@@ -10,8 +10,8 @@ let hitsCount = 0;
   // elvisApi = await AssetsClientSdk.legacyElvisAPI();
   // elvisContext.updateCallback = updateSelection;
 
-  const contextService = await AssetsPluginContext.get(['https://cmisandbox-dam.eos-emea.woodwing.cloud/']);
-  const apiClient = AssetsApiClient.fromPluginContext(contextService);
+  const contextService = await window.AssetsClientSdk.AssetsPluginContext.get(['https://cmisandbox-dam.eos-emea.woodwing.cloud/']);
+  const apiClient = await window.AssetsClientSdk.AssetsApiClient.fromPluginContext(contextService);
   //contextService.updateCallback = updateSelection;
   
   console.log(contextService);
