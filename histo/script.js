@@ -16,7 +16,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------106");
+  console.log("------init-------107");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -107,10 +107,25 @@ function updateSelection() {
     hideForm();
     return;
   }
+  // DOM Elements--------------------------------------------
+  let DOM_content = document.querySelector("#histo-panel-content");
+  let DOM_publicationSelect = document.querySelector(
+    "#histo-panel-form-add-publication"
+  );
+  let DOM_currentPublication = document.querySelector(
+    "#histo-panel-form-add-publication"
+  );
+  let DOM_currentParution = document.querySelector(
+    "#histo-panel-form-add-parution"
+  );
+  let DOM_currentEdition = document.querySelector(
+    "#histo-panel-form-add-edition"
+  );
+  let DOM_currentFolio = document.querySelector("#histo-panel-form-add-folio");
 
-  // console.log("assetPath", assetPath);
-  // console.log("asset.metadata", asset.metadata);
+  let DOM_submitForm = document.querySelector("#histo-panel-form-add-submit");
 
+  // cf_HistoriqueParutions ------------------------------
   let cf_HistoriqueParutions = asset.metadata.cf_HistoriqueParutions;
 
   if (cf_HistoriqueParutions === undefined) {
@@ -118,36 +133,40 @@ function updateSelection() {
   }
 
   // TODO display cf_HistoriqueParutions in FORM for delete
+  if (cf_HistoriqueParutions.length > 0) {
+    let ul = document.createElement("ul");
 
-  // list all publications from the same Fond
-  // for the moment is a config files
-  // TODO with new API query folders of asset "fond"
-  let publicationSelect = document.querySelector(
-    "#histo-panel-form-add-publication"
-  );
-  for (let p = 0; p < publications[fond].length; p++) {
-    const publication = publications[fond][p];
-    publicationSelect.add(new Option(publication, publication));
+    for (let h = 0; h < cf_HistoriqueParutions.length; h++) {
+      const histo = cf_HistoriqueParutions[h];
+      let li = document.createElement("li");
+      li.innerHTML = cf_HistoriqueParutions[i];
+    }
+
+    DOM_content.appendChild(ul);
   }
 
-  // listerner on submit
-  let submitForm = document.querySelector("#histo-panel-form-add-submit");
-  submitForm.addEventListener("click", (event) => {
+  // BUILD FORM---------------------------------------------
+  // list all publications from the same "Fond"
+  // for the moment is a config files
+  // TODO with new API query folders of asset "Fond"
+
+  for (let p = 0; p < publications[fond].length; p++) {
+    const publication = publications[fond][p];
+    DOM_publicationSelect.add(new Option(publication, publication));
+  }
+
+  // listerners --------------------------------------------
+  // on other parutions
+
+  // on submit
+  DOM_submitForm.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
 
-    let currentPublication = document
-      .querySelector("#histo-panel-form-add-publication")
-      .value.trim();
-    let currentParution = document
-      .querySelector("#histo-panel-form-add-parution")
-      .value.trim();
-    let currentEdition = document
-      .querySelector("#histo-panel-form-add-edition")
-      .value.trim();
-    let currentFolio = document
-      .querySelector("#histo-panel-form-add-folio")
-      .value.trim();
+    let currentPublication = DOM_currentPublication.value.trim();
+    let currentParution = DOM_currentParution.value.trim();
+    let currentEdition = DOM_currentEdition.value.trim();
+    let currentFolio = DOM_currentFolio.value.trim();
 
     if (
       currentPublication !== "" &&
@@ -156,9 +175,12 @@ function updateSelection() {
       currentFolio !== "" &&
       isNumeric(currentFolio)
     ) {
-      //TODO
+      // force padding 0 on folios
+      currentFolio.padStart(3, "0");
       // verifier que la string généré n'est pas dans la liste des hostorique de parution de l'asset selectionné
       let toHistoryToAdd = `${currentPublication}#${currentParution}#${currentEdition}#${currentFolio}`;
+      // si pas dans la liste l'ajouter à la liste
+      // soummetre la liste à ASSETS
       if (cf_HistoriqueParutions.includes(toHistoryToAdd)) {
         updateMsgInPanel(lang.historicAlreadySet);
       } else {
@@ -166,15 +188,14 @@ function updateSelection() {
         let metadata = {
           cf_HistoriqueParutions: cf_HistoriqueParutions,
         };
-        console.log(metadata);
-        elvisApi.update(currentId, metadata);
+        elvisApi.update(currentId, metadata, () => {
+          // vider le formulaire
+          // refresh asset/panel
+          DOM_currentParution.value = "";
+          DOM_currentFolio.value = "";
+          updateSelection();
+        });
       }
-
-      // si pas dans la liste l'ajouter à la liste
-      // resoummetre la liste à ASSETS
-      // update(id: string, metadata: {}, successHandler?: any): void
-      // vider le formulaire
-      // refresh asset/panel
     } else {
       updateMsgInPanel(lang.setValidContext);
     }
