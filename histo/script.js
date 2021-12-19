@@ -145,13 +145,8 @@ function updateSelection() {
           hist !== histoToDel;
         }),
       };
-      elvisApi.update(currentId, metadata, () => {
-        // vider le formulaire
-        // refresh asset/panel
-        DOM_currentParution.value = "";
-        DOM_currentFolio.value = "";
-        updateSelection();
-      });
+      console.log(metadata);
+      elvisApi.update(currentId, metadata);
     });
   }
 
@@ -190,7 +185,7 @@ function updateSelection() {
           // refresh asset/panel
           DOM_currentParution.value = "";
           DOM_currentFolio.value = "";
-          updateSelection();
+          //updateSelection();
         });
       }
     } else {
@@ -200,7 +195,7 @@ function updateSelection() {
 }
 
 (async () => {
-  console.log("------init-------112");
+  console.log("------init-------113");
   try {
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
