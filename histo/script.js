@@ -16,7 +16,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------102");
+  console.log("------init-------103");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -111,15 +111,14 @@ function updateSelection() {
   // console.log("assetPath", assetPath);
   // console.log("asset.metadata", asset.metadata);
 
-  // display cf_HistoriqueParutions in FORM
-  // TODO
   let cf_HistoriqueParutions = asset.metadata.cf_HistoriqueParutions;
   let cf_HistoriqueParutionsArray;
-  if (cf_HistoriqueParutions.trim() !== "") {
+  if (cf_HistoriqueParutions !== "") {
     cf_HistoriqueParutionsArray = cf_HistoriqueParutions.split(",");
   } else {
     cf_HistoriqueParutionsArray = [];
   }
+  // TODO display cf_HistoriqueParutions in FORM for delete
 
   console.log("cf_HistoriqueParutions", cf_HistoriqueParutions);
   console.log("cf_HistoriqueParutionsArray", cf_HistoriqueParutionsArray);
