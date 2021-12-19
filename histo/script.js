@@ -51,10 +51,8 @@ function showForm() {
 
 function handleDeleteHistory(event) {
   event.preventDefault();
-  console.log("BEFORE DEL", cf_HistoriqueParutions);
 
   let histoToDel = event.target.id;
-  console.log(histoToDel);
 
   let new_cf_HistoriqueParutions = cf_HistoriqueParutions.filter(
     (hist) => hist !== histoToDel
@@ -63,8 +61,7 @@ function handleDeleteHistory(event) {
   let metadata = {
     cf_HistoriqueParutions: new_cf_HistoriqueParutions,
   };
-  console.log(metadata);
-  //elvisApi.update(currentId, metadata);
+  elvisApi.update(currentId, metadata);
 }
 
 function handleSubmitForm(event) {
@@ -190,7 +187,7 @@ function updateSelection() {
 
 (async () => {
   try {
-    console.log("v122");
+    console.log("Plugin Historique Parution v1.0.0");
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
     elvisContext = await AssetsClientSdk.legacyElvisContext();
@@ -216,6 +213,7 @@ function updateSelection() {
 
     DOM_submitForm = document.querySelector("#histo-panel-form-add-submit");
     try {
+      // avoid multiple initialisation
       DOM_submitForm.removeEventListener("click", handleSubmitForm);
     } catch (error) {
       console.log("ici");
