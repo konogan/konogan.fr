@@ -15,7 +15,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------99");
+  console.log("------init-------100");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -122,23 +122,24 @@ function updateSelection() {
   }
 
   // listerner on submit
+
   let submitForm = document.querySelector("#histo-panel-form-add-submit");
-  submitForm.addEventListener("submit", (event) => {
+  submitForm.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
 
     let currentPublication = document
       .querySelector("#histo-panel-form-add-publication")
-      .ariaValueMax.trim();
+      .value.trim();
     let currentParution = document
       .querySelector("#histo-panel-form-add-parution")
-      .ariaValueMax.trim();
+      .value.trim();
     let currentEdition = document
       .querySelector("#histo-panel-form-add-edition")
-      .ariaValueMax.trim();
+      .value.trim();
     let currentFolio = document
       .querySelector("#histo-panel-form-add-folio")
-      .ariaValueMax.trim();
+      .value.trim();
 
     if (
       currentPublication !== "" &&
