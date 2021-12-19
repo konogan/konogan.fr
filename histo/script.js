@@ -4,10 +4,12 @@ let contextService;
 let hitsCount = 0;
 
 (async () => {
+  console.log("init");
   elvisContext = await AssetsClientSdk.legacyElvisContext();
   contextService = await window.AssetsClientSdk.AssetsPluginContext.get();
   elvisApi = await AssetsClientSdk.legacyElvisAPI();
   elvisContext.updateCallback = updateSelection;
+
   updateSelection();
 })();
 
@@ -25,21 +27,23 @@ function updateMsgInPanel(content = "") {
 }
 
 function updateSelection() {
+  console.log("----updateSelection-----");
+
   if (!elvisContext) {
     return;
   }
   let hits = elvisContext.activeTab.originalAssetSelection;
 
-  console.debug("elvisContext", elvisContext);
-  console.debug("elvisContext.hasSelection()", elvisContext.hasSelection());
-  console.debug(
+  console.log("elvisContext", elvisContext);
+  console.log("elvisContext.hasSelection()", elvisContext.hasSelection());
+  console.log(
     "elvisContext.hasFilteredSelection()",
     elvisContext.hasFilteredSelection()
   );
 
   hitsCount = hits.length;
 
-  console.debug("hitsCount", hitsCount);
+  console.log("hitsCount", hitsCount);
 
   if (hits.length > 1) {
     updateMsgInPanel(lang.multipleSelection);
@@ -62,12 +66,12 @@ function updateSelection() {
     return;
   }
 
-  console.debug("assetPath", assetPath);
-  console.debug("asset.metadata", asset.metadata);
+  console.log("assetPath", assetPath);
+  console.log("asset.metadata", asset.metadata);
 
   // display cf_HistoriqueParutions in FORM
 
-  console.debug("cf_HistoriqueParutions", asset.metadata.cf_HistoriqueParutions);
+  console.log("cf_HistoriqueParutions", asset.metadata.cf_HistoriqueParutions);
 
   // initlistener on form
 
