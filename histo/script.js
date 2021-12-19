@@ -16,7 +16,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------104");
+  console.log("------init-------105");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -112,17 +112,12 @@ function updateSelection() {
   // console.log("asset.metadata", asset.metadata);
 
   let cf_HistoriqueParutions = asset.metadata.cf_HistoriqueParutions;
-  let cf_HistoriqueParutionsArray;
 
-  console.log("cf_HistoriqueParutions", cf_HistoriqueParutions);
-  if (cf_HistoriqueParutions !== "" && cf_HistoriqueParutions.length > 0) {
-    cf_HistoriqueParutionsArray = cf_HistoriqueParutions.split(",");
-  } else {
-    cf_HistoriqueParutionsArray = [];
+  if (cf_HistoriqueParutions === undefined) {
+    cf_HistoriqueParutions = [];
   }
-  // TODO display cf_HistoriqueParutions in FORM for delete
 
-  console.log("cf_HistoriqueParutionsArray", cf_HistoriqueParutionsArray);
+  // TODO display cf_HistoriqueParutions in FORM for delete
 
   // list all publications from the same Fond
   // for the moment is a config files
@@ -165,12 +160,12 @@ function updateSelection() {
       // verifier que la string généré n'est pas dans la liste des hostorique de parution de l'asset selectionné
       let toHistoryToAdd = `${currentPublication}#${currentParution}#${currentEdition}#${currentFolio}`;
       console.log(toHistoryToAdd);
-      if (cf_HistoriqueParutionsArray.includes(toHistoryToAdd)) {
+      if (cf_HistoriqueParutions.includes(toHistoryToAdd)) {
         updateMsgInPanel(lang.historicAlreadySet);
       } else {
-        cf_HistoriqueParutionsArray.push(toHistoryToAdd);
+        cf_HistoriqueParutions.push(toHistoryToAdd);
         let metadata = {
-          cf_HistoriqueParutions: cf_HistoriqueParutionsArray.concat(","),
+          cf_HistoriqueParutions: cf_HistoriqueParutions,
         };
         console.log(metadata);
         //elvisApi.update(currentId, metadata);
