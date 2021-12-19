@@ -12,7 +12,7 @@ let hitsCount = 0;
 })();
 
 function updateMsgInPanel(content = "") {
-  const panelMsg = document.querySelector("panel-messages");
+  const panelMsg = document.querySelector("#panel-histo");
   if (content === "") {
     panelMsg.classList.remove("message");
     panelMsg.innerHTML = ``;
