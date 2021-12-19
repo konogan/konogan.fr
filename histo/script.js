@@ -4,7 +4,7 @@ let contextService;
 let hitsCount = 0;
 
 (async () => {
-  console.log("init");
+  console.log("------init-------");
   elvisContext = await AssetsClientSdk.legacyElvisContext();
   contextService = await window.AssetsClientSdk.AssetsPluginContext.get();
   elvisApi = await AssetsClientSdk.legacyElvisAPI();
