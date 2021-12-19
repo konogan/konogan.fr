@@ -13,7 +13,10 @@ let hitsCount = 0;
   const contextService = await AssetsPluginContext.get(['https://cmisandbox-dam.eos-emea.woodwing.cloud/']);
   const apiClient = AssetsApiClient.fromPluginContext(contextService);
   //contextService.updateCallback = updateSelection;
- 
+  
+  console.log(contextService);
+  console.log(apiClient);
+
   //updateSelection();
 })();
 
