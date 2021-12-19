@@ -5,7 +5,7 @@ const languages = {
     multipleSelection:
       "Sélectionnez un seul fichier pour voir ses fichiers liés",
     noSelection: "Sélectionnez un fichier pour voir ses fichiers liés",
-    onlyMediasImages: "Sélectionner une image 'Médias'",
+    onlyMediasImages: "Sélectionner une image 'Médias' 'Originales'",
   },
 };
 
