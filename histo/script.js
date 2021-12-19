@@ -15,7 +15,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------4");
+  console.log("------init-------5");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -122,7 +122,7 @@ function updateSelection() {
   }
 
 
-  
+
 
 
   // initlistener on form
