@@ -15,7 +15,7 @@ const publications = {
 };
 
 (async () => {
-  console.log("------init-------100");
+  console.log("------init-------101");
   try {
     // use the old Elvis Context
     // TODO pass on webpack with new context
@@ -28,6 +28,10 @@ const publications = {
     console.log(error);
   }
 })();
+
+function isNumeric(value) {
+  return /^-?\d+$/.test(value);
+}
 
 function updateMsgInPanel(content = "") {
   const panelMsg = document.querySelector("#histo-panel-message");
@@ -106,9 +110,14 @@ function updateSelection() {
   // console.log("asset.metadata", asset.metadata);
 
   // display cf_HistoriqueParutions in FORM
-  console.log("cf_HistoriqueParutions", asset.metadata.cf_HistoriqueParutions);
-
   // TODO
+  let cf_HistoriqueParutions = asset.metadata.cf_HistoriqueParutions;
+  console.log("cf_HistoriqueParutions", cf_HistoriqueParutions);
+  console.log(
+    "cf_HistoriqueParutions.split(',')",
+    cf_HistoriqueParutions.split[","]
+  );
+
 
   // list all publications from the same Fond
   // for the moment is a config files
@@ -121,8 +130,8 @@ function updateSelection() {
     publicationSelect.add(new Option(publication, publication));
   }
 
-  // listerner on submit
 
+  // listerner on submit
   let submitForm = document.querySelector("#histo-panel-form-add-submit");
   submitForm.addEventListener("click", (event) => {
     event.preventDefault();
@@ -145,8 +154,19 @@ function updateSelection() {
       currentPublication !== "" &&
       currentParution !== "" &&
       currentEdition !== "" &&
-      currentFolio !== ""
+      currentFolio !== "" &&
+      isNumeric(currentFolio)
     ) {
+      //TODO
+      // verifier que la string généré n'est pas dans la liste des hostorique de parution de l'asset selectionné
+      let toHistoryToAdd = `${currentPublication}#${currentParution}#${currentEdition}#${currentFolio}`;
+      console.log(toHistoryToAdd);
+      // si pas dans la liste l'ajouter à la liste
+
+      // resoummetre la liste à ASSETS
+
+      // update(id: string, metadata: {}, successHandler?: any): void
+
       console.log(
         "CHOOSE",
         currentPublication,
@@ -155,235 +175,7 @@ function updateSelection() {
         currentFolio
       );
     } else {
-      console.log(
-        "ERREUR",
-        currentPublication,
-        currentParution,
-        currentEdition,
-        currentFolio
-      );
+      updateMsgInPanel(lang.setValidContext);
     }
   });
-
-  // initlistener on form
-
-  //     var title = isImage ? lang.pdfTitle : lang.imgTitle;
-
-  //     var pdfPromiseResolve;
-  //     var pdfPromise = new Promise(function (resolve, reject) {
-  //       pdfPromiseResolve = resolve;
-  //     });
-  //     var imgPromiseResolve;
-  //     var imgPromise = new Promise(function (resolve, reject) {
-  //       imgPromiseResolve = resolve;
-  //     });
-  //     var repoPromiseResolve;
-  //     var repoPromise = new Promise(function (resolve, reject) {
-  //       repoPromiseResolve = resolve;
-  //     });
-  //     var articlePromiseResolve;
-  //     var articlePromise = new Promise(function (resolve, reject) {
-  //       articlePromiseResolve = resolve;
-  //     });
-  //     var webPromiseResolve;
-  //     var webPromise = new Promise(function (resolve, reject) {
-  //       webPromiseResolve = resolve;
-  //     });
-
-  //     if (["PHNPQN", "Ciné fiction"].includes(assetFond)) {
-  //       pdfPromiseResolve(0);
-  //       imgPromiseResolve(0);
-  //       repoPromiseResolve(0);
-  //       articlePromiseResolve(0);
-  //       webPromiseResolve(0);
-  //     } else {
-  //       // immagini collegate a PDF (ex CMIA-16)
-  //       if (secondFolder == "Archives" && assetDomain == "pdf") {
-  //         if (
-  //           asset.metadata.publicationName &&
-  //           asset.metadata.issueName &&
-  //           asset.metadata.edition &&
-  //           pageRange
-  //         ) {
-  //           var publication = asset.metadata.publicationName;
-  //           var issue = asset.metadata.issueName;
-  //           var edition = asset.metadata.edition;
-  //           var path = `${publication}#${issue}#${edition}#${pageRange}`;
-
-  //           elvisApi.search(
-  //             {
-  //               q: `cf_HistoriqueParutions:"${path}" AND assetDomain:image`,
-  //             },
-  //             function (data) {
-  //               if (data.totalHits > 0 && hitsCount == 1) {
-  //                 pdfPromiseResolve(1);
-
-  //                 $("#panel-messages").append(`
-  //                                     <span class="accordion active">${title}</span>
-  //                                 `);
-  //                 $("#panel-messages").append(`
-  //                                     <div class="panel">
-  //                                         <ul id="panel-img" class="thumb-panel"></ul>
-  //                                     </div>
-  //                                 `);
-
-  //                 data.hits.forEach((item) => {
-  //                   var name = item.metadata.name;
-  //                   var path = item.metadata.folderPath;
-
-  //                   $("#panel-img").append(`
-  //                                         <li>
-  //                                             <a href='#' data-id='${item.id}'>
-  //                                                 <img src='${item.thumbnailUrl}' alt='${item.metadata.filename}'>
-  //                                             </a>
-  //                                             <p>
-  //                                                 ${item.metadata.filename}
-  //                                                 <br>${item.metadata.folderPath}
-  //                                             </p>
-  //                                         </li>
-  //                                     `);
-  //                 });
-
-  //                 initAccordion();
-
-  //                 $("#panel-img a").click(function () {
-  //                   elvisContext.openAssets(this.dataset.id);
-  //                 });
-  //               } else if (hitsCount == 1) {
-  //                 pdfPromiseResolve(0);
-  //               }
-  //             }
-  //           );
-  //         } else {
-  //           pdfPromiseResolve(0);
-  //         }
-  //       } else {
-  //         pdfPromiseResolve(0);
-  //       }
-
-  //       // PDF collegati a immagini (ex CMIA-16)
-  //       if (
-  //         assetDomain == "image" &&
-  //         secondFolder == "Medias" &&
-  //         ["Argentiques", "Originales"].includes(thirdFolder)
-  //       ) {
-  //         var paths = asset.metadata.cf_HistoriqueParutions;
-  //         var query = "assetDomain:pdf and ";
-  //         var index = 0;
-
-  //         if (paths) {
-  //           paths.forEach((element) => {
-  //             var pdfArray = element.split("#");
-
-  //             if (pdfArray.length == 4) {
-  //               if (index > 0) query += " OR ";
-  //               else query += "(";
-  //               query += `(originPlatform:"${assetFond}" and publicationName:"${pdfArray[0]}" and issueName:"${pdfArray[1]}" and edition:"${pdfArray[2]}" and pageRange:${pdfArray[3]})`;
-  //               index++;
-  //             }
-  //           });
-
-  //           elvisApi.search(
-  //             {
-  //               q: query + ")",
-  //             },
-  //             function (data) {
-  //               if (data.totalHits > 0 && hitsCount == 1) {
-  //                 imgPromiseResolve(1);
-
-  //                 $("#panel-messages").append(`
-  //                                     <span class="accordion active">${title}</span>
-  //                                 `);
-  //                 $("#panel-messages").append(`
-  //                                     <div class="panel">
-  //                                         <ul id="panel-pdf" class="thumb-panel"></ul>
-  //                                     </div>
-  //                                 `);
-
-  //                 data.hits.forEach((item) => {
-  //                   var name = item.metadata.name;
-  //                   var path = item.metadata.folderPath;
-
-  //                   $("#panel-pdf").append(`
-  //                                         <li>
-  //                                             <a href='#' data-id='${item.id}' data-hp='${item.metadata.publicationName}#${item.metadata.issueName}#${item.metadata.edition}#${item.metadata.pageRange}'>
-  //                                                 <img src='${item.thumbnailUrl}' alt='${item.metadata.filename}'>
-  //                                             </a>
-  //                                             <p>
-  //                                                 ${item.metadata.publicationName}
-  //                                                 <br>${item.metadata.issueName}
-  //                                                 <br>${item.metadata.edition}
-  //                                                 <br><br><em>folio</em>: ${item.metadata.pageRange}
-  //                                             </p>
-  //                                         </li>
-  //                                     `);
-  //                 });
-
-  //                 initAccordion();
-
-  //                 var single = function (e) {
-  //                     elvisContext.openAssets(e.currentTarget.dataset.id);
-  //                   },
-  //                   double = function (e) {
-  //                     var query = `cf_HistoriqueParutions:"${e.currentTarget.dataset.hp}" AND assetDomain:image`;
-
-  //                     var first = true;
-  //                     contextService.openBrowse("/", true);
-  //                     var unsubscribe = contextService.subscribe((data) => {
-  //                       if (!first) {
-  //                         unsubscribe();
-  //                       }
-  //                       contextService.openSearch(query);
-  //                       first = false;
-  //                     });
-  //                   };
-  //                 var clicks = 0,
-  //                   timeout;
-
-  //                 $("#panel-pdf a").click(function (e) {
-  //                   clicks++;
-  //                   if (clicks == 1) {
-  //                     timeout = setTimeout(function () {
-  //                       single(e);
-  //                       clicks = 0;
-  //                     }, 250);
-  //                   } else {
-  //                     clearTimeout(timeout);
-  //                     double(e);
-  //                     clicks = 0;
-  //                   }
-  //                 });
-  //               } else if (hitsCount == 1) {
-  //                 imgPromiseResolve(0);
-  //               }
-  //             }
-  //           );
-  //         } else {
-  //           imgPromiseResolve(0);
-  //         }
-  //       } else {
-  //         imgPromiseResolve(0);
-  //       }
-  //     }
-
-  //     Promise.all([
-  //       pdfPromise,
-  //       imgPromise,
-  //       repoPromise,
-  //       articlePromise,
-  //       webPromise,
-  //     ]).then((values) => {
-  //       sum = values.reduce(function (a, b) {
-  //         return a + b;
-  //       }, 0);
-
-  //       if (sum == 0) {
-  //         $("#panel-messages").addClass("message");
-  //         $("#panel-messages").html(`
-  //                     <img src="../common/img/links_plus_grey.svg" class="icon">
-  //                     <h5>${lang.noLinksTitle}</h5>
-  //                     <div class='error-text'>${lang.noLinks}</div>`);
-  //       }
-  //     });
-  //   }
 }

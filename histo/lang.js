@@ -6,6 +6,7 @@ const languages = {
       "Sélectionnez un seul fichier pour voir ses fichiers liés",
     noSelection: "Sélectionnez un fichier pour voir ses fichiers liés",
     onlyMediasImages: "Sélectionner une image 'Médias' 'Originales'",
+    setValidContext: "Saisir une parution et un folio valide",
   },
 };
 
