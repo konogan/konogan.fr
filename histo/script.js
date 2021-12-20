@@ -193,10 +193,17 @@ function updateSelection() {
   // list all publications from the same "Fond"
   // for the moment is a config files
   // TODO with new API query folders of asset "Fond"
-
   for (let p = 0; p < publications[fond].length; p++) {
     const publication = publications[fond][p];
     DOM_publicationSelect.add(new Option(publication, publication));
+  }
+
+  // si il n'y a pas d'historique de parution on propose la parution cible
+  if (cf_HistoriqueParutions.length === 0) {
+    let parutionCible = asset.metadata.eissn
+      ? parseInt(asset.metadata.eissn)
+      : "";
+    DOM_currentParution.value = parutionCible;
   }
 
   // listerners  on other parutions
