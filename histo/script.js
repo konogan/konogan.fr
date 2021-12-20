@@ -215,7 +215,7 @@ function updateSelection() {
 
 (async () => {
   try {
-    console.log("Plugin Historique Parution v1.0.4");
+    console.log("Plugin Historique Parution v1.0.5");
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
     elvisContext = await AssetsClientSdk.legacyElvisContext();
