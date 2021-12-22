@@ -44,6 +44,15 @@ function hideForm() {
   panelFormDiv.style.display = "none";
 }
 
+function overlay(display = false) {
+  let overlay = document.querySelector(".overlay");
+  if (display) {
+    overlay.style.display = "block";
+  } else {
+    overlay.style.display = "none";
+  }
+}
+
 function showForm() {
   const panelFormDiv = document.querySelector("#histo-panel-form-add");
   panelFormDiv.style.display = "block";
@@ -51,7 +60,7 @@ function showForm() {
 
 function handleDeleteHistory(event) {
   event.preventDefault();
-
+  overlay(true);
   let histoToDel = event.target.id;
 
   let new_cf_HistoriqueParutions = cf_HistoriqueParutions.filter(
@@ -77,6 +86,7 @@ function handleDeleteHistory(event) {
 
 function handleSubmitForm(event) {
   event.preventDefault();
+  overlay(true);
   let currentPublication = DOM_currentPublication.value.trim();
   let currentParution = DOM_currentParution.value.trim();
   let currentEdition = DOM_currentEdition.value.trim();
@@ -86,20 +96,26 @@ function handleSubmitForm(event) {
     currentPublication !== "" &&
     currentParution !== "" &&
     currentEdition !== "" &&
-    currentFolio !== "" &&
-    isNumeric(currentFolio)
+    currentFolio !== ""
   ) {
-    // force padding 0 on folios
-    currentFolio.padStart(3, "0");
-    // verifier que la string généré n'est pas dans la liste des hostorique de parution de l'asset selectionné
-    let toHistoryToAdd = `${currentPublication}#${currentParution}#${currentEdition}#${currentFolio}`;
-    // si pas dans la liste l'ajouter à la liste
-    // soummetre la liste à ASSETS
-    if (cf_HistoriqueParutions.includes(toHistoryToAdd)) {
-      updateMsgInPanel(lang.historicAlreadySet);
-    } else {
-      let new_cf_HistoriqueParutions = cf_HistoriqueParutions;
-      new_cf_HistoriqueParutions.push(toHistoryToAdd);
+    // on peut recevoir le folio avec une virgule
+    // dans ce cas il faut generer autant de lignes que de folios
+    let folios = currentFolio.split(",");
+    let new_cf_HistoriqueParutions = cf_HistoriqueParutions;
+    let needUpdate = false;
+    for (let f = 0; f < folios.length; f++) {
+      // force padding 0 on folios
+      const fo = folios[f].trim().padStart(3, "0");
+      // verifier que la string généré n'est pas dans la liste des hostorique de parution de l'asset selectionné
+      let toHistoryToAdd = `${currentPublication}#${currentParution}#${currentEdition}#${fo}`;
+      // la chaine construite n'est pas dans la liste
+      if (!cf_HistoriqueParutions.includes(toHistoryToAdd)) {
+        new_cf_HistoriqueParutions.push(toHistoryToAdd);
+        needUpdate = true;
+      }
+    }
+    //si on doit update
+    if (needUpdate) {
       let metadata = {
         cf_HistoriqueParutions: new_cf_HistoriqueParutions,
       };
@@ -111,7 +127,6 @@ function handleSubmitForm(event) {
         metadata["edition"] = currentEdition;
         metadata["pageRange"] = currentFolio;
       }
-
       elvisApi.update(currentId, metadata, () => {
         // vider le formulaire
         DOM_currentParution.value = "";
@@ -147,6 +162,7 @@ function updateSelection() {
   // ONE ASSET IS SELECTED--------------------------------
   updateMsgInPanel();
   showForm();
+  overlay(false);
 
   const asset = hits[0];
   const assetPath = asset.metadata.folderPath.split("/");
@@ -183,7 +199,7 @@ function updateSelection() {
       let histo = cf_HistoriqueParutions[h];
       let histoBeauty = histo.split("#").join(" ");
       let li = document.createElement("li");
-      li.innerHTML = `${histoBeauty} <span id="${histo}" class='histoDel'>Supp.</span>`;
+      li.innerHTML = `<span class="histo">${histoBeauty}</span><span id="${histo}" class='delBtn'></span>`;
       ul.appendChild(li);
     }
     DOM_content.appendChild(ul);
@@ -207,7 +223,7 @@ function updateSelection() {
   }
 
   // listerners  on other parutions
-  const deleteBtns = document.querySelectorAll(".histoDel");
+  const deleteBtns = document.querySelectorAll(".delBtn");
   for (const deleteBtn of deleteBtns) {
     deleteBtn.addEventListener("click", handleDeleteHistory);
   }
@@ -215,14 +231,14 @@ function updateSelection() {
 
 (async () => {
   try {
-    console.log("Plugin Historique Parution v1.0.5");
+    console.log("Plugin Historique Parution v1.0.6");
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
     elvisContext = await AssetsClientSdk.legacyElvisContext();
     contextService = await window.AssetsClientSdk.AssetsPluginContext.get();
     elvisApi = await AssetsClientSdk.legacyElvisAPI();
     elvisContext.updateCallback = updateSelection;
-
+    overlay(true);
     // INIT--------------------------------------------
     DOM_content = document.querySelector("#histo-panel-content");
     DOM_publicationSelect = document.querySelector(
