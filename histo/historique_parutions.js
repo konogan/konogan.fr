@@ -2,8 +2,10 @@ let elvisContext;
 let elvisApi;
 let contextService;
 let hitsCount = 0;
-let currentId = null;
-let cf_HistoriqueParutions = null;
+
+// globals for current selected asset
+let assetId = null;
+
 let DOM_content;
 let DOM_currentPublication;
 let DOM_currentParution;
@@ -19,6 +21,28 @@ const publications = {
     "Elle Décoration",
     "Elle Décoration Hors-Série",
     "Elle Décoration Hors-Série Inspirations",
+  ],
+  "Télé 7 Jours": ["Télé 7 Jours", "Télé 7 Jours Hors-Série"],
+  "Télé 7 Jours Jeux": ["Télé 7 Jours Jeux"],
+  "Télé 7 Jeux": ["Télé 7 Jeux", "Télé 7 Jeux Hors-Série"],
+  "S Le Mag": ["S Le Mag"],
+  "Ciné Fiction": [
+    "Art et Décoration",
+    "Art et Décoration Hors-Série",
+    "Elle",
+    "Elle Hors-Série",
+    "Elle Hors-Série Icône",
+    "Elle à Table",
+    "Elle à Table Hors-Série",
+    "Elle Décoration",
+    "Elle Décoration Hors-Série",
+    "Elle Décoration Hors-Série Inspirations",
+    "Télé 7 Jours",
+    "Télé 7 Jours Hors-Série",
+    "Télé 7 Jours Jeux",
+    "Télé 7 Jeux",
+    "Télé 7 Jeux Hors-Série",
+    "S Le Mag",
   ],
 };
 
@@ -47,7 +71,7 @@ function hideForm() {
 function overlay(display = false) {
   let overlay = document.querySelector(".overlay");
   if (display) {
-    overlay.style.display = "block";
+    overlay.style.display = "flex";
   } else {
     overlay.style.display = "none";
   }
@@ -81,7 +105,7 @@ function handleDeleteHistory(event) {
     metadata["pageRange"] = "";
   }
 
-  elvisApi.update(currentId, metadata);
+  elvisApi.update(assetId, metadata);
 }
 
 function handleSubmitForm(event) {
@@ -103,6 +127,7 @@ function handleSubmitForm(event) {
     let folios = currentFolio.split(",");
     let new_cf_HistoriqueParutions = cf_HistoriqueParutions;
     let needUpdate = false;
+    let needUpdateParutionMetadatas = cf_HistoriqueParutions.length === 0;
     for (let f = 0; f < folios.length; f++) {
       // force padding 0 on folios
       const fo = folios[f].trim().padStart(3, "0");
@@ -119,15 +144,20 @@ function handleSubmitForm(event) {
       let metadata = {
         cf_HistoriqueParutions: new_cf_HistoriqueParutions,
       };
-      // si UN seul historique de parution il faut definir les autres metadonnnes
+      // si le champ etait vide auparavant
+      // il faut definir les autres metadonnnes
       // publicationName,edition pageRange,issueName
-      if (new_cf_HistoriqueParutions.length === 1) {
+      if (needUpdateParutionMetadatas) {
         metadata["publicationName"] = currentPublication;
         metadata["issueName"] = currentParution;
         metadata["edition"] = currentEdition;
-        metadata["pageRange"] = currentFolio;
+        metadata["pageRange"] = folios
+          .sort()
+          .map((f) => f.trim().padStart(3, "0"))
+          .join(",");
       }
-      elvisApi.update(currentId, metadata, () => {
+
+      elvisApi.update(assetId, metadata, () => {
         // vider le formulaire
         DOM_currentParution.value = "";
         DOM_currentFolio.value = "";
@@ -135,6 +165,7 @@ function handleSubmitForm(event) {
     }
   } else {
     updateMsgInPanel(lang.setValidContext);
+    overlay(false);
   }
 }
 
@@ -143,7 +174,7 @@ function updateSelection() {
     console.log("elvisContext NOT FOUND");
     return;
   }
-
+  overlay(false);
   hideForm();
   // EMPTY PREVIOUS INSTANCES OF PANEL-------------------------
   DOM_content.innerHTML = "";
@@ -162,28 +193,33 @@ function updateSelection() {
   // ONE ASSET IS SELECTED--------------------------------
   updateMsgInPanel();
   showForm();
-  overlay(false);
 
   const asset = hits[0];
   const assetPath = asset.metadata.folderPath.split("/");
   const fond = assetPath[1];
-  const ArchivesOrMedias = assetPath[2];
-  const AfterArchivesOrMedias = assetPath[3];
   const assetDomain = asset.metadata.assetDomain;
   const isImage = assetDomain === "image";
 
-  currentId = asset.id;
+  // on defini les valeurs globales de l'asset selectionné
+  assetId = asset.id;
+  assetPublication = asset.metadata["publicationName"]
+    ? asset.metadata["publicationName"]
+    : null;
+  assetParution = asset.metadata["issueName"]
+    ? asset.metadata["issueName"]
+    : null;
+  assetEdition = asset.metadata["edition"] ? asset.metadata["edition"] : null;
+  assetPageRange = asset.metadata["pageRange"]
+    ? asset.metadata["pageRange"]
+    : null;
 
-  if (
-    ArchivesOrMedias !== "Medias" ||
-    AfterArchivesOrMedias !== "Originales" ||
-    !isImage
-  ) {
-    updateMsgInPanel(lang.onlyMediasImages);
+  if (!isImage) {
+    updateMsgInPanel(lang.onlyImages);
     hideForm();
     return;
   }
-  // ONE COMPATIBLE ASSET IS SELECTED---------------------
+
+  // IF ONLY ONE COMPATIBLE ASSET IS SELECTED---------------------
 
   // cf_HistoriqueParutions ------------------------------
   cf_HistoriqueParutions = asset.metadata.cf_HistoriqueParutions;
@@ -199,7 +235,9 @@ function updateSelection() {
       let histo = cf_HistoriqueParutions[h];
       let histoBeauty = histo.split("#").join(" ");
       let li = document.createElement("li");
+
       li.innerHTML = `<span class="histo">${histoBeauty}</span><span id="${histo}" class='delBtn'></span>`;
+
       ul.appendChild(li);
     }
     DOM_content.appendChild(ul);
@@ -209,16 +247,16 @@ function updateSelection() {
   // list all publications from the same "Fond"
   // for the moment is a config files
   // TODO with new API query folders of asset "Fond"
-  for (let p = 0; p < publications[fond].length; p++) {
-    const publication = publications[fond][p];
-    DOM_publicationSelect.add(new Option(publication, publication));
+  if (publications[fond]) {
+    for (let p = 0; p < publications[fond].length; p++) {
+      const publication = publications[fond][p];
+      DOM_publicationSelect.add(new Option(publication, publication));
+    }
   }
 
   // si il n'y a pas d'historique de parution on propose la parution cible
   if (cf_HistoriqueParutions.length === 0) {
-    let parutionCible = asset.metadata.eissn
-      ? parseInt(asset.metadata.eissn)
-      : "";
+    let parutionCible = asset.metadata.eissn ? asset.metadata.eissn : "";
     DOM_currentParution.value = parutionCible;
   }
 
@@ -226,12 +264,13 @@ function updateSelection() {
   const deleteBtns = document.querySelectorAll(".delBtn");
   for (const deleteBtn of deleteBtns) {
     deleteBtn.addEventListener("click", handleDeleteHistory);
+    deleteBtn.style.display = "block";
   }
 }
 
 (async () => {
   try {
-    console.log("Plugin Historique Parution v1.0.6");
+    console.log("Plugin Historique Parution v1.0.10");
     // use the old Elvis Context
     // TODO REWORK on webpack with new context
     elvisContext = await AssetsClientSdk.legacyElvisContext();
