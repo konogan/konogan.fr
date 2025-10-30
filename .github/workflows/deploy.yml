@@ -32,6 +32,12 @@ jobs:
           overwrite: true
           strip_components: 0
           debug: true  # temporaire pour logs
+          exclude: |
+            .git*
+            .github*
+            node_modules
+            README.md
+            LICENSE
 
       - name: Restart Nginx container
         uses: appleboy/ssh-action@v1.2.0
