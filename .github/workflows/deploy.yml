@@ -10,7 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
+      - name: Ensure target folder exists
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 2222
+          script: |
+            mkdir -p /opt/docker/konogan/html
       - name: Deploy via SSH
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -20,7 +28,7 @@ jobs:
           port: 2222
           source: "./"
           target: "/opt/docker/konogan/html"
-          rm: true
+          rm: false
           overwrite: true
           strip_components: 0
           debug: true  # temporaire pour logs
