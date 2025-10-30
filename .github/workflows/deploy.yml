@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Ensure target folder exists
         uses: appleboy/ssh-action@v1.2.0
         with:
@@ -19,6 +20,7 @@ jobs:
           port: 2222
           script: |
             mkdir -p /opt/docker/konogan/html
+            
       - name: Deploy via SSH
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -38,6 +40,7 @@ jobs:
             node_modules
             README.md
             LICENSE
+          tar_exec: "tar --no-same-owner --no-same-permissions"
 
       - name: Restart Nginx container
         uses: appleboy/ssh-action@v1.2.0
