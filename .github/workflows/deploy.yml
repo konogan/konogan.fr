@@ -3,34 +3,27 @@ name: Deploy to Freebox
 on:
   push:
     branches:
-      - main  # Déploiement auto sur push dans main
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # (optionnel) Si build (npm, vite, etc.)
-      # - name: Build static site
-      #   run: |
-      #     npm ci
-      #     npm run build
-
-      - name: Deploy via SSH (SCP)
+      - name: Deploy via SSH
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 2222
-          source: "./"                # dossier à déployer (./dist si build)
+          source: "./"
           target: "/opt/docker/konogan/html"
-          rm: true                    # supprime les anciens fichiers
-          overwrite: true             # écrase si besoin
-          strip_components: 0         # garde l’arborescence telle quelle
+          rm: true
+          overwrite: true
+          strip_components: 0
+          debug: true  # temporaire pour logs
 
       - name: Restart Nginx container
         uses: appleboy/ssh-action@v1.2.0
