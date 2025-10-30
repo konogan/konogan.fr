@@ -25,6 +25,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
+          port: 2222
           source: "./"                # dossier à déployer (./dist si build)
           target: "/opt/docker/konogan/html"
           rm: true                    # supprime les anciens fichiers
@@ -37,6 +38,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
+          port: 2222
           script: |
             cd /opt/docker/konogan
             docker compose restart
