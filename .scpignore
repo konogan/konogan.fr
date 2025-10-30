@@ -1,6 +1,5 @@
-.git/
-.github/
-.idea/
-.vscode/
-README.md
+.git*
+.github*
 node_modules/
+README.md
+LICENSE

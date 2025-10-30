@@ -20,8 +20,8 @@ jobs:
           port: 2222
           script: |
             mkdir -p /opt/docker/konogan/html
-            
-      - name: Deploy via SSH
+
+      - name: Deploy via SSH (SCP)
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -30,17 +30,12 @@ jobs:
           port: 2222
           source: "./"
           target: "/opt/docker/konogan/html"
-          rm: false
+          rm: true
           overwrite: true
           strip_components: 0
-          debug: true  # temporaire pour logs
-          exclude: |
-            .git*
-            .github*
-            node_modules
-            README.md
-            LICENSE
-          tar_exec: "tar --no-same-owner --no-same-permissions"
+          debug: true
+          tar_exec: tar
+          tar_dereference: false
 
       - name: Restart Nginx container
         uses: appleboy/ssh-action@v1.2.0
