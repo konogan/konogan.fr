@@ -1,43 +1,38 @@
-name: Deploy to Freebox
+name: Deploy konogan.fr to Freebox (tar optimized)
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Ensure target folder exists
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: 2222
-          script: |
-            mkdir -p /opt/docker/konogan/html
+      - name: Create site archive
+        run: |
+          echo "Creating compressed tar archive..."
+          tar -czf site_html.tar.gz -C html .
 
-      - name: Deploy via SSH (SCP)
+      - name: Upload archive to Freebox /tmp
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 2222
-          source: "./"
-          target: "/opt/docker/konogan/html"
-          rm: true
+          source: "site_html.tar.gz"
+          target: "/home/freebox/tmp"
           overwrite: true
-          strip_components: 0
+          rm: false
           debug: true
-          tar_exec: tar
-          tar_dereference: false
 
-      - name: Restart Nginx container
+      - name: Deploy site and restart Nginx container
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -45,5 +40,17 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 2222
           script: |
-            cd /opt/docker/konogan
-            docker compose restart
+            echo "[konogan] Cleaning target directory..."
+            sudo rm -rf /opt/docker/konogan/html
+            sudo mkdir -p /opt/docker/konogan/html
+            sudo chown -R $USER:$USER /opt/docker/konogan/html
+            sudo chmod -R 755 /opt/docker/konogan/html
+
+            echo "[konogan] Extracting new content..."
+            tar -xzf /home/freebox/tmp/site_html.tar.gz -C /opt/docker/konogan/html
+            rm /home/freebox/tmp/site_html.tar.gz
+
+            echo "[konogan] Restarting Nginx container..."
+            sudo docker compose -f /opt/docker/konogan/docker-compose.yml restart konogan
+
+            echo "[konogan] Deployment complete."
