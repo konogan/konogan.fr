@@ -1,326 +1,545 @@
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      content="width=device-width, initial-scale=1, maximum-scale=1"
-      name="viewport"
-    />
-    <meta content="Konogan website" name="description" />
-    <meta
-      content="Graphic Designer, Illustrator, Illustration, Design, Branding, Identity, Logo,  Web Design, HTML5, CSS3, Digital Publishing, DPS, Aquafadas, Ville d'Avray, France"
-      name="keywords"
-    />
-    <title>Konogan</title>
-    <link href="imgs/favicon.ico" rel="shortcut icon" />
-    <link href="css/konogan.css" media="all" rel="stylesheet" />
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konogan Cossec — Chef de Projet, Transformation Éditoriale & Cloud</title>
+  <meta name="description" content="Chef de Projet spécialisé dans la transformation des systèmes éditoriaux print. Cloud AWS, WoodWing, InDesign, IA éditoriale. Paris.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/konogan.css">
+  <script src="js/konogan.js"></script>
+</head>
+<body>
 
-  <body>
-    <div class="header">
-      <img src="imgs/logoPerso.svg" alt="logoPerso" title="LogoPerso" />
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Konogan</a>
+  <ul class="nav-links">
+    <li><a href="#profil">Profil</a></li>
+    <li><a href="#experience">Expérience</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Paris · Médias print · Cloud AWS</p>
+    <h1 class="hero-name">Konogan<br>Cossec</h1>
+    <p class="hero-title">Chef de Projet —<br>Transformation Éditoriale & Cloud</p>
+    <p class="hero-sub">
+      Production print <span>·</span> Systèmes éditoriaux <span>·</span> IA éditoriale
+    </p>
+    <a href="#contact" class="hero-cta">Me contacter →</a>
+  </div>
+  <div class="hero-right">
+    <!-- Remplacer le src par le chemin vers votre photo -->
+    <img
+            src="imgs/photo_cv_konogan.jpg"
+            alt="Konogan Cossec"
+            class="hero-photo"
+            onerror="this.style.display='none'"
+    >
+    <blockquote class="hero-manifesto">
+      "Issu du terrain créatif, j'ai construit une expertise technique
+      au service des métiers que je pratiquais moi-même."
+    </blockquote>
+    <div class="hero-links">
+      <a href="https://linkedin.com/in/konogan" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="cv/CV_Konogan_Cossec.pdf" target="_blank">Télécharger le CV</a>
     </div>
+  </div>
+</section>
 
-    <div class="projets">
-     
-
-      <div class="projetcontainer">
-        <ul>
-          <li>
-            <img alt="" src="imgs/portfolio/mur/murnumerique.jpg" />
-          </li>
-        </ul>
-        <div>
-          <h2>Paris Match</h2>
-          <p>
-            Développement et installation d'un mur numérique interactif à la
-            rédaction de Paris Match, pour suivre en direct la production du
-            magazine. Application Node Webkit (https://nwjs.io/), chargé de
-            collecter les informations auprès des différents systèmes éditoriaux
-            afin de représenter la parution en cours. Cette application expose
-            aussi son propre service web (responsive) accessible par le réseau
-            de l'entreprise afin de gérer les différentes options d'affichage
-            ainsi que les actions de navigation en temps réel (scoll, zoom,
-            etc). Ce mur est actuellement en fonctionnement 24/24 7/7
-          </p>
-        </div>
+<!-- PROFIL -->
+<section id="profil">
+  <p class="section-label">À propos</p>
+  <h2 class="section-title">Profil</h2>
+  <div class="profil-grid">
+    <div class="profil-text">
+      <p>
+        Issu du terrain créatif — maquettiste, motion designer, intermittent du spectacle —
+        j'ai construit une expertise technique progressivement, au service des métiers que
+        je pratiquais moi-même.
+      </p>
+      <p>
+        Chef de projet depuis plus de 15 ans dans les grands groupes de presse print français,
+        je pilote des projets de transformation éditoriale de bout en bout : conception des solutions,
+        coordination avec les équipes d'ingénierie cloud, conduite du changement, accompagnement
+        des équipes sur le terrain.
+      </p>
+      <p>
+        Interlocuteur naturel entre rédactions, DSI et prestataires. Je parle aussi bien à un
+        directeur artistique qu'à une équipe d'ingénierie cloud — et je suis le seul dans la pièce
+        à concevoir l'interface, spécifier l'architecture et livrer la CSS.
+      </p>
+      <p>
+        <em>Une constante sur 30 ans : m'approprier tôt les technologies qui transforment
+          les métiers de la presse, de la maquette print aux architectures cloud.</em>
+      </p>
+    </div>
+    <div class="profil-markers">
+      <div class="marker">
+        <div class="marker-value">30 ans</div>
+        <div class="marker-label">dans les grands groupes de presse print français</div>
       </div>
-
-      <div class="projetcontainer">
-        <ul>
-          <li>
-            <img
-              alt=""
-              src="imgs/portfolio/pressetablette/pressetablette.jpg"
-            />
-          </li>
-        </ul>
-        <div>
-          <h2>LA PRESSE SUR TABLETTE</h2>
-          <p>
-            Ecriture du chapitre dédié à l'ergonomie et la navigation. ISBN
-            978-2-35307-031-2
-          </p>
-        </div>
+      <div class="marker">
+        <div class="marker-value">+4 millions</div>
+        <div class="marker-label">d'assets migrés vers WoodWing Assets</div>
       </div>
-
-      <div class="projetcontainer">
-        <ul>
-          <li>
-            <img alt="" src="imgs/portfolio/jdd/capture.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/jdd/IMG_0093.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/jdd/IMG_0087.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/jdd/IMG_0088.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/jdd/IMG_0089.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/jdd/IMG_0090.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/jdd/IMG_0091.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/jdd/IMG_0092.jpg" />
-          </li>
-        </ul>
-        <div>
-          <h2>Journal du Dimanche</h2>
-          <p>
-            Dans le cadre de la modernisation de l'application enrichie (iPad)
-            du Journal du Dimanche, réalisation de l'ensemble des modèles
-            statiques et dynamiques de l'application. Solution basée sur une
-            intégration WoodWing / Indesign / InCopy / Marklogic / Aquafadas et
-            du templating HTML5 CSS3
-          </p>
-        </div>
+      <div class="marker">
+        <div class="marker-value">15 ans</div>
+        <div class="marker-label">de durée de vie du plugin InDesign CEP — toujours en production</div>
       </div>
-
-      <div class="projetcontainer">
-        <ul>
-          <li>
-            <img alt="" src="imgs/portfolio/pm/IMG_0096.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/pm/IMG_0094.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/pm/IMG_0096.jpg" />
-          </li>
-        </ul>
-        <div>
-          <h2>Paris Match</h2>
-          <p>Gestion / développement de l'application iPad de Paris Match</p>
-          <p>Solution basée sur une intégration Woodwing / Indesign / DPS</p>
-        </div>
-      </div>
-
-      <div class="projetcontainer">
-        <ul>
-          <li>
-            <img alt="" src="imgs/portfolio/webdesign/EspacePresseDEF.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/webdesign/pixelle.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/webdesign/TVScore.jpg" />
-          </li>
-        </ul>
-        <div>
-          <h2>WebDesign - Integration</h2>
-          <p>
-            Intégration de produits tiers, reflexion ergonomique autour des
-            outils "web" du quotidien. (petite selection)
-          </p>
-        </div>
-      </div>
-
-      <div class="projetcontainer">
-        <ul>
-          <li>
-            <img alt="" src="imgs/portfolio/gdf/gdf-1.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/gdf/20040522-IMG_7333.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/gdf/20040522-IMG_7356.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/gdf/20040522-IMG_7387.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/gdf/20040522-IMG_7390.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/gdf/20040606-IMG_7876.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/gdf/20040606-IMG_7881.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/gdf/20040606-IMG_7897.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/gdf/20040606-IMG_7917.jpg" />
-          </li>
-        </ul>
-        <div>
-          <h2>Gaz de France - Gennevilliers</h2>
-          <p>
-            Inventaire photographique de la friche industrielle Gaz de France à
-            Gennevilliers avant destruction.
-          </p>
-          <p>
-            Cet inventaire se compose de deux "éléments" : <br />
-            - un
-            <a
-              href="https://www.blurb.fr/b/411765-etat-des-jeux"
-              target="_blank"
-              >livre</a
-            >
-            présentant une selection de photographies "traditionnelles" <br />
-            - un ensemble de panoramiques destinés à l'exposition
-          </p>
-        </div>
-      </div>
-
-      <div class="projetcontainer">
-        <ul>
-          <li>
-            <img alt="" src="imgs/portfolio/chartreuse/c-1.jpg" />
-          </li>
-        </ul>
-        <div>
-          <h2>Chartreuse du Mont Dieu</h2>
-          <p>
-            Située au cœur des Ardennes, la chartreuse du Mont-Dieu s’est
-            construite dans une vaste clairière, au milieu d’une immense forêt
-            de 1.123 hectares, pleine d’arbres séculaires et traversée par des
-            sources, alimentant jadis de nombreux étangs.
-          </p>
-          <p>
-            Ce livre est un aperçu des panoramiques réalisés au fil des saisons.
-          </p>
-        </div>
-      </div>
-
-      <div class="projetcontainer">
-        <ul>
-          <li>
-            <img alt="" src="imgs/portfolio/edj/edj-1.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/edj/IMG_6877.JPG" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/edj/IMG_6880.JPG" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/edj/IMG_6918.JPG" />
-          </li>
-        </ul>
-        <div>
-          <h2>Etat des Jeux</h2>
-          <p>
-            En 2004, Paris est officiellement ville candidate pour les jeux
-            olympiques de 2012. Le projet propose d’installer le village
-            olympique sur le site des « Batignolles ». C’est une surface de 45
-            ha en semi-friche. Domaine de la SNCF dans sa plus grande part, il
-            est occupé par quelques entreprises de long de la rue Cardinet.
-          </p>
-          <p>
-            Etat des jeux propose un inventaire sur la situation de cette fiche
-            au moment où le comité olympique examine la candidature de Paris.
-          </p>
-          <p>
-            Deux formats sont retenus, tout d’abord un format « traditionnel »
-            dont une petite sélection fait l’objet d’un
-            <a
-              href="https://www.blurb.fr/b/411765-etat-des-jeux"
-              target="_blank"
-              >livre</a
-            >, ensuite, un format « grand angle » composé d’une quarantaine de
-            tirages panoramiques de 3 mètres.
-          </p>
-        </div>
-      </div>
-
-      <div class="projetcontainer">
-        <ul>
-          <li>
-            <img alt="" src="imgs/portfolio/identite/ame.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/identite/airs.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/identite/ckzone.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/identite/krystena.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/identite/lesondujour.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/identite/presseliberte.jpg" />
-          </li>
-          <li>
-            <img alt="" src="imgs/portfolio/identite/rce.jpg" />
-          </li>
-        </ul>
-        <div>
-          <h2>Identité graphique</h2>
-          <p>
-            Petite selection d'identités graphiques, réalisées au fil des
-            années.
-          </p>
-        </div>
+      <div class="marker">
+        <div class="marker-value">6 titres</div>
+        <div class="marker-label">migrés vers WoodWing Studio sur le périmètre CMI France</div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div id="about">
-      <div id="aboutfill">
-        <div class="cbout">
-          <p>
-            <b>Konogan</b>, ouvrier du digital depuis 1997.<br />
-            Actuellement Chef de Projet chez CMI.<br />
-          </p>
+<!-- EXPÉRIENCE -->
+<section id="experience">
+  <div class="inner">
+    <p class="section-label">Parcours</p>
+    <h2 class="section-title">Expérience</h2>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-dates">2019 — aujourd'hui</div>
+          <div class="exp-company">CMI France</div>
+          <div class="exp-location">Paris · CDI</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">Chef de Projet — Transformation Éditoriale & Cloud</div>
+          <div class="exp-context">ELLE, Version Femina, Marianne, Public, France Dimanche, Art & Décoration, Télé 7 Jours...</div>
+          <ul class="exp-bullets">
+            <li>Benchmark formel des solutions éditoriales du marché (WoodWing, Censhare...) ayant orienté le choix stratégique du groupe.</li>
+            <li>Migration de <strong>6 titres</strong> depuis le système maison vers <strong>WoodWing Studio & Assets</strong> — reprise du fonds documentaire : <strong>+4 millions d'assets</strong>.</li>
+            <li>Développement de plugins WoodWing sur mesure, dashboards de pilotage et UX design des outils internes DSI (Figma · XD · CSS).</li>
+            <li>Conception d'architectures <strong>AWS serverless</strong> pour l'automatisation des flux de fabrication, en collaboration avec l'équipe d'ingénierie cloud.</li>
+            <li>Plugin InDesign <strong>UXP</strong> (2026) — nouvelle génération de l'extensibilité Adobe, en remplacement du CEP.</li>
+            <li>Plugin InDesign <strong>CEP</strong> maintenu en production sur les titres non migrés — génère l'intégralité des PDFs destinés aux imprimeurs, <strong>15 ans après sa livraison</strong>.</li>
+            <li><strong>POC IA avancé</strong> : extraction et validation de contenus éditoriaux structurés (grilles jeux, textes) pour Télé 7 Jours et Télé 7 Jeux.</li>
+            <li>Newsletter interne de veille IA éditoriale diffusée aux équipes techniques et rédactionnelles.</li>
+          </ul>
         </div>
       </div>
-    </div>
 
-    <div id="footer">
-      <div id="iconwrap">
-        <a href="https://www.twitter.com/konogan" target="_blank">
-          <img alt="" class="icon" src="imgs/1twitter.svg" />
-        </a>
-        <a href="https://www.linkedin.com/in/konogan" target="_blank">
-          <img alt="" class="icon" src="imgs/1in.svg" />
-        </a>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-dates">2007 — 2019</div>
+          <div class="exp-company">Lagardère Active</div>
+          <div class="exp-location">Levallois-Perret</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">Ingénieur · Développeur</div>
+          <div class="exp-context">Paris Match, Journal du Dimanche, ELLE, Télé 7 Jours, Première, Auto Moto, Parents et 20+ titres print</div>
+          <ul class="exp-bullets">
+            <li>Développement du <strong>plugin InDesign CEP</strong> interfacé avec le système éditorial groupe (CMIS) — génération de l'intégralité des PDFs destinés aux imprimeurs, encore actif 15 ans après.</li>
+            <li>Outil web de pilotage de transcodeurs vidéo pour la VOD groupe — banc de montage virtuel, précurseur dans son domaine.</li>
+            <li><strong>Paris Match 360</strong> : mur interactif à la rédaction (12 écrans HD · Node.js / NW.js · 24h/24).
+              <span class="exp-award">🏆 Netexplo Change 2016</span>
+            </li>
+            <li>Publication enrichie du JDD sur tablette et smartphone (design, intégration, ergonomie).</li>
+          </ul>
+        </div>
       </div>
-      <h6>©2014 Konogan</h6>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-dates">2000 — 2006</div>
+          <div class="exp-company">Interdeco</div>
+          <div class="exp-location">Paris · Régie Lagardère</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">Webmaster · Designer</div>
+          <div class="exp-context">interdeco.fr · i-g-a.com · ellefondation.org · ADbarometer · Pariscope...</div>
+          <ul class="exp-bullets">
+            <li>Recruté en 2000 pour développer la présence web du groupe — l'une des premières régies à se doter d'une infrastructure web complète.</li>
+            <li>Création et administration des sites intranet / extranet · CMS sur mesure · outils RH · reporting · communication interne.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-dates">1998 — 2000</div>
+          <div class="exp-company">Hachette Filipacchi Régions</div>
+          <div class="exp-location">Prestation</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">Maquettiste</div>
+          <div class="exp-context">Éditions régionales et internationales des grands titres du groupe</div>
+          <ul class="exp-bullets">
+            <li>Maquette et mise en page des éditions régionales de ELLE, ELLE Décoration et Paris Match.</li>
+            <li>Maquette des éditions belges de ELLE Décoration et Paris Match.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-dates">1995 — 1998</div>
+          <div class="exp-company">V.A.M.O.S.</div>
+          <div class="exp-location">Intermittent du spectacle</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">Motion Designer · Infographiste 3D</div>
+          <ul class="exp-bullets">
+            <li>Conception graphique, motion design, infographie 3D pour projets multimédia et print.</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
-    <script src="js/konogan.js" type="application/javascript"></script>
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-974260-11"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
+  </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section id="competences">
+  <p class="section-label">Savoir-faire</p>
+  <h2 class="section-title">Compétences</h2>
+  <div class="skills-grid">
+    <div class="skill-block">
+      <div class="skill-title">Pilotage & transformation</div>
+      <div class="skill-tags">
+        <span class="tag strong">Chef de projet</span>
+        <span class="tag">Conduite du changement</span>
+        <span class="tag">Documentation</span>
+        <span class="tag">Accompagnement équipes</span>
+        <span class="tag">Coordination prestataires</span>
+        <span class="tag">Veille IA éditoriale</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-title">Systèmes éditoriaux</div>
+      <div class="skill-tags">
+        <span class="tag strong">WoodWing Studio & Assets</span>
+        <span class="tag strong">Adobe InDesign</span>
+        <span class="tag">Photoware</span>
+        <span class="tag">Adobe InCopy</span>
+        <span class="tag">Intégration DAM / PAO</span>
+        <span class="tag">Migration fonds doc.</span>
+        <span class="tag">CMIS</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-title">Architecture & Cloud</div>
+      <div class="skill-tags">
+        <span class="tag strong">AWS serverless</span>
+        <span class="tag">Lambda</span>
+        <span class="tag">S3</span>
+        <span class="tag">SQS</span>
+        <span class="tag">EventBridge</span>
+        <span class="tag">API Gateway</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-title">Développement</div>
+      <div class="skill-tags">
+        <span class="tag strong">Plugins InDesign CEP & UXP</span>
+        <span class="tag">JavaScript · Node.js</span>
+        <span class="tag">HTML · CSS</span>
+        <span class="tag">Go</span>
+        <span class="tag">UX Design</span>
+        <span class="tag">Figma · XD</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-title">Création & médias</div>
+      <div class="skill-tags">
+        <span class="tag strong">Maquette presse print</span>
+        <span class="tag">Motion design</span>
+        <span class="tag">Infographie 3D</span>
+        <span class="tag">After Effects</span>
+        <span class="tag">Publication multi-supports</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-title">Formation & publication</div>
+      <div class="skill-tags">
+        <span class="tag">Bac S · 1995 · 18–19/20</span>
+        <span class="tag strong">La presse sur tablette</span>
+        <span class="tag">CFPJ · 2014</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="inner">
+    <p class="section-label">Réalisations</p>
+    <h2 class="section-title">Portfolio</h2>
+    <div class="portfolio-grid">
+
+      <div class="portfolio-card">
+        <div class="carousel">
+          <div class="carousel-track">
+            <img src="imgs/portfolio/mur/murnumerique.jpg" alt="Paris Match 360" class="portfolio-card-img">
+          </div>
+          <button class="carousel-prev" onclick="moveCarousel(this, -1)">‹</button>
+          <button class="carousel-next" onclick="moveCarousel(this, 1)">›</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-card-year">2016 · 🏆 Netexplo Change</div>
+          <div class="portfolio-card-title">Paris Match 360</div>
+          <div class="portfolio-card-desc">Mur numérique interactif à la rédaction. 12 écrans HD · Node.js / NW.js · 24h/24 7j/7.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="carousel">
+          <div class="carousel-track">
+            <img src="imgs/portfolio/jdd/capture.jpg" alt="JDD 1" class="portfolio-card-img">
+            <img src="imgs/portfolio/jdd/IMG_0093.jpg" alt="JDD 2" class="portfolio-card-img">
+            <img src="imgs/portfolio/jdd/IMG_0087.jpg" alt="JDD 3" class="portfolio-card-img">
+            <img src="imgs/portfolio/jdd/IMG_0088.jpg" alt="JDD 4" class="portfolio-card-img">
+            <img src="imgs/portfolio/jdd/IMG_0089.jpg" alt="JDD 5" class="portfolio-card-img">
+            <img src="imgs/portfolio/jdd/IMG_0090.jpg" alt="JDD 6" class="portfolio-card-img">
+            <img src="imgs/portfolio/jdd/IMG_0091.jpg" alt="JDD 7" class="portfolio-card-img">
+            <img src="imgs/portfolio/jdd/IMG_0092.jpg" alt="JDD 8" class="portfolio-card-img">
+          </div>
+          <button class="carousel-prev" onclick="moveCarousel(this, -1)">‹</button>
+          <button class="carousel-next" onclick="moveCarousel(this, 1)">›</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-card-year">2013 · Lagardère Active</div>
+          <div class="portfolio-card-title">Journal du Dimanche</div>
+          <div class="portfolio-card-desc">Publication enrichie sur tablette et smartphone. Design, intégration, ergonomie. WoodWing · InDesign · Aquafadas.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="carousel">
+          <div class="carousel-track">
+            <img src="imgs/portfolio/pm/IMG_0096.jpg" alt="Paris Match iPad 1" class="portfolio-card-img">
+            <img src="imgs/portfolio/pm/IMG_0094.jpg" alt="Paris Match iPad 2" class="portfolio-card-img">
+            <img src="imgs/portfolio/pm/IMG_0096.jpg" alt="Paris Match iPad 3" class="portfolio-card-img">
+          </div>
+          <button class="carousel-prev" onclick="moveCarousel(this, -1)">‹</button>
+          <button class="carousel-next" onclick="moveCarousel(this, 1)">›</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-card-year">2012 · Lagardère Active</div>
+          <div class="portfolio-card-title">Paris Match iPad</div>
+          <div class="portfolio-card-desc">Application iPad de Paris Match. Intégration WoodWing / InDesign / DPS.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="carousel">
+          <div class="carousel-track">
+            <img src="imgs/portfolio/webdesign/EspacePresseDEF.jpg" alt="Webdesign 1" class="portfolio-card-img">
+            <img src="imgs/portfolio/webdesign/pixelle.jpg" alt="Webdesign 2" class="portfolio-card-img">
+            <img src="imgs/portfolio/webdesign/TVScore.jpg" alt="Webdesign 3" class="portfolio-card-img">
+          </div>
+          <button class="carousel-prev" onclick="moveCarousel(this, -1)">‹</button>
+          <button class="carousel-next" onclick="moveCarousel(this, 1)">›</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-card-year">2000–2006 · Interdeco</div>
+          <div class="portfolio-card-title">WebDesign & Intégration</div>
+          <div class="portfolio-card-desc">Intégration de produits tiers, réflexion ergonomique autour des outils web. Sélection de réalisations.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="carousel">
+          <div class="carousel-track">
+            <img src="imgs/portfolio/gdf/gdf-1.jpg" alt="GDF 1" class="portfolio-card-img">
+            <img src="imgs/portfolio/gdf/20040522-IMG_7333.jpg" alt="GDF 2" class="portfolio-card-img">
+            <img src="imgs/portfolio/gdf/20040522-IMG_7356.jpg" alt="GDF 3" class="portfolio-card-img">
+            <img src="imgs/portfolio/gdf/20040522-IMG_7387.jpg" alt="GDF 4" class="portfolio-card-img">
+            <img src="imgs/portfolio/gdf/20040522-IMG_7390.jpg" alt="GDF 5" class="portfolio-card-img">
+            <img src="imgs/portfolio/gdf/20040606-IMG_7876.jpg" alt="GDF 6" class="portfolio-card-img">
+            <img src="imgs/portfolio/gdf/20040606-IMG_7881.jpg" alt="GDF 7" class="portfolio-card-img">
+            <img src="imgs/portfolio/gdf/20040606-IMG_7897.jpg" alt="GDF 8" class="portfolio-card-img">
+            <img src="imgs/portfolio/gdf/20040606-IMG_7917.jpg" alt="GDF 9" class="portfolio-card-img">
+          </div>
+          <button class="carousel-prev" onclick="moveCarousel(this, -1)">‹</button>
+          <button class="carousel-next" onclick="moveCarousel(this, 1)">›</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-card-year">2004 · Photographie</div>
+          <div class="portfolio-card-title">Gaz de France — Gennevilliers</div>
+          <div class="portfolio-card-desc">Inventaire photographique de la friche industrielle avant destruction. Livre + panoramiques d'exposition.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="carousel">
+          <div class="carousel-track">
+            <img src="imgs/portfolio/identite/ame.jpg" alt="Identité 1" class="portfolio-card-img">
+            <img src="imgs/portfolio/identite/airs.jpg" alt="Identité 2" class="portfolio-card-img">
+            <img src="imgs/portfolio/identite/ckzone.jpg" alt="Identité 3" class="portfolio-card-img">
+            <img src="imgs/portfolio/identite/krystena.jpg" alt="Identité 4" class="portfolio-card-img">
+            <img src="imgs/portfolio/identite/lesondujour.jpg" alt="Identité 5" class="portfolio-card-img">
+            <img src="imgs/portfolio/identite/presseliberte.jpg" alt="Identité 6" class="portfolio-card-img">
+            <img src="imgs/portfolio/identite/rce.jpg" alt="Identité 7" class="portfolio-card-img">
+          </div>
+          <button class="carousel-prev" onclick="moveCarousel(this, -1)">‹</button>
+          <button class="carousel-next" onclick="moveCarousel(this, 1)">›</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-card-year">1995–2010 · Création</div>
+          <div class="portfolio-card-title">Identités graphiques</div>
+          <div class="portfolio-card-desc">Sélection d'identités visuelles réalisées au fil des années.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="carousel">
+          <div class="carousel-track">
+            <img src="imgs/portfolio/interdeco/interdeco_1.jpg" alt="Interdeco site principal" class="portfolio-card-img">
+            <img src="imgs/portfolio/interdeco/interdeco_4.jpg" alt="Interdeco annuaire" class="portfolio-card-img">
+          </div>
+          <button class="carousel-prev" onclick="moveCarousel(this, -1)">‹</button>
+          <button class="carousel-next" onclick="moveCarousel(this, 1)">›</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-card-year">2000–2006 · Interdeco</div>
+          <div class="portfolio-card-title">Interdeco.fr & Pariscope</div>
+          <div class="portfolio-card-desc">Site principal du groupe, annuaire des services, intégration Pariscope. XHTML · CSS · ASP · PHP · MySQL.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="carousel">
+          <div class="carousel-track">
+            <img src="imgs/portfolio/interdeco/interdeco_5.jpg" alt="Interdeco Intranet" class="portfolio-card-img">
+            <img src="imgs/portfolio/interdeco/interdeco_8.jpg" alt="Interdeco Métropoles" class="portfolio-card-img">
+          </div>
+          <button class="carousel-prev" onclick="moveCarousel(this, -1)">‹</button>
+          <button class="carousel-next" onclick="moveCarousel(this, 1)">›</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-card-year">2000–2006 · Interdeco</div>
+          <div class="portfolio-card-title">Intranet & Métropoles</div>
+          <div class="portfolio-card-desc">CMS intranet groupe, plateforme Métropoles régionales, gestion documentaire. XHTML · CSS · ASP · PHP · MSSql.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="carousel">
+          <div class="carousel-track">
+            <img src="imgs/portfolio/interdeco/interdeco_6.jpg" alt="Fondation ELLE 1" class="portfolio-card-img">
+            <img src="imgs/portfolio/interdeco/interdeco_2.jpg" alt="Fondation ELLE 2" class="portfolio-card-img">
+          </div>
+          <button class="carousel-prev" onclick="moveCarousel(this, -1)">‹</button>
+          <button class="carousel-next" onclick="moveCarousel(this, 1)">›</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-card-year">2003–2006 · Interdeco</div>
+          <div class="portfolio-card-title">Fondation d'entreprise ELLE</div>
+          <div class="portfolio-card-desc">Site multilingue avec CMS sur mesure — gestion de projets, candidatures, back-office. XHTML · PHP · MySQL.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="carousel">
+          <div class="carousel-track">
+            <img src="imgs/portfolio/interdeco/interdeco_7.jpg" alt="IGA Global Advertising" class="portfolio-card-img">
+            <img src="imgs/portfolio/interdeco/interdeco_3.jpg" alt="IGA back-office" class="portfolio-card-img">
+            <img src="imgs/portfolio/interdeco/interdeco_9.jpg" alt="IGA Inflights et IMS" class="portfolio-card-img">
+          </div>
+          <button class="carousel-prev" onclick="moveCarousel(this, -1)">‹</button>
+          <button class="carousel-next" onclick="moveCarousel(this, 1)">›</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-card-year">2002–2006 · Interdeco</div>
+          <div class="portfolio-card-title">IGA & Sites spécifiques</div>
+          <div class="portfolio-card-desc">Interdeco Global Advertising (i-g-a.com), IGA Inflights, IMS — sites en anglais avec CMS et back-office avancé. XHTML · PHP · MySQL.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="carousel">
+          <div class="carousel-track">
+            <img src="imgs/portfolio/interdeco/interdeco_10.jpg" alt="Outils communication et RH" class="portfolio-card-img">
+          </div>
+          <button class="carousel-prev" onclick="moveCarousel(this, -1)">‹</button>
+          <button class="carousel-next" onclick="moveCarousel(this, 1)">›</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-card-year">2001–2006 · Interdeco</div>
+          <div class="portfolio-card-title">Outils internes</div>
+          <div class="portfolio-card-desc">ReportingWEB, QuizzInterdeco, Calendrier éditorial, gestion des offres RH — applications métier développées sur mesure.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <div>
+      <p class="section-label">Me rejoindre</p>
+      <h2 class="section-title">Contact</h2>
+      <p class="contact-text">
+        Ouvert aux opportunités dans les groupes médias print et auprès des éditeurs
+        de solutions éditoriales. Basé à Paris et périphérie.
+      </p>
+    </div>
+    <div class="contact-links">
+      <a href="https://linkedin.com/in/konogan" target="_blank" rel="noopener" class="contact-link">
+        <div>
+          <span class="contact-link-label">LinkedIn</span>
+          linkedin.com/in/konogan
+        </div>
+      </a>
+      <a href="cv/CV_Konogan_Cossec.pdf" target="_blank" class="contact-link">
+        <div>
+          <span class="contact-link-label">Curriculum Vitæ</span>
+          Télécharger le CV (PDF)
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 Konogan Cossec · Paris
+</footer>
+
+<script>
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.style.color = '');
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) active.style.color = 'var(--steel)';
       }
-      gtag("js", new Date());
-      gtag("config", "UA-974260-11");
-    </script>
-  </body>
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
 </html>

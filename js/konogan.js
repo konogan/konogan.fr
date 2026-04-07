@@ -1,31 +1,25 @@
-"use strict";
+function moveCarousel(btn, dir) {
+  const carousel = btn.closest('.carousel');
+  const track = carousel.querySelector('.carousel-track');
+  const imgs = track.querySelectorAll('img');
+  const dots = carousel.querySelectorAll('.carousel-dots span');
+  let current = parseInt(carousel.dataset.current || 0);
 
-function RandArray(array){
-  let rand = Math.random()*array.length | 0;
-  let rValue = array[rand];
-  return rValue;
+  current = (current + dir + imgs.length) % imgs.length;
+  carousel.dataset.current = current;
+  track.style.transform = `translateX(-${current * 100}%)`;
+
+  dots.forEach((d, i) => d.classList.toggle('active', i === current));
 }
 
-
-function RandImgs(array){
-  array.map(liEl=>{liEl.style.display="none";});
-  let rEl = RandArray(array);
-  rEl.style.display="block";
-}
-
-
-
-(()=>{
-  const uls = document.querySelectorAll("ul");
-  uls.forEach((ulEl)=>{
-    const lisEl = ulEl.querySelectorAll('li');
-    const lis =[...lisEl];
-    RandImgs(lis)
-    lisEl.forEach(liEl=>{
-      liEl.addEventListener('click',()=>{
-        RandImgs(lis)
-      })
-    })
-  })
-
-})();
+// Init dots pour chaque carousel
+document.querySelectorAll('.carousel').forEach(carousel => {
+  const imgs = carousel.querySelectorAll('img');
+  const dotsContainer = carousel.querySelector('.carousel-dots');
+  imgs.forEach((_, i) => {
+    const dot = document.createElement('span');
+    if (i === 0) dot.classList.add('active');
+    dotsContainer.appendChild(dot);
+  });
+  carousel.dataset.current = 0;
+});
