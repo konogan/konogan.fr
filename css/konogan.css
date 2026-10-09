@@ -71,33 +71,23 @@ nav {
 
 /* ── HERO ───────────────────────────────────────────────────── */
 #hero {
-    min-height: calc(100vh - var(--nav-h));
+    min-height: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    max-width: 100%;
+    padding: 0;
+    background: linear-gradient(to right, var(--ivory) 50%, var(--white) 50%);
 }
 
 .hero-left {
     background: var(--ivory);
-    padding: var(--pad);
+    padding: clamp(3rem, 7vw, 5.5rem) var(--pad);
     display: flex;
     flex-direction: column;
     justify-content: center;
     border-right: 1px solid var(--rule);
     position: relative;
     overflow: hidden;
-}
-
-.hero-left::before {
-    content: 'K';
-    position: absolute;
-    bottom: -0.1em; right: -0.05em;
-    font-family: var(--f-display);
-    font-size: 32vw;
-    font-weight: 900;
-    color: var(--warm);
-    line-height: 1;
-    pointer-events: none;
-    z-index: 0;
 }
 
 .hero-left > * { position: relative; z-index: 1; }
@@ -161,7 +151,7 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: var(--pad);
+    padding: clamp(3rem, 7vw, 5.5rem) var(--pad);
     gap: 2rem;
 }
 
@@ -306,8 +296,11 @@ section {
     letter-spacing: 0.08em;
     color: var(--steel);
     text-transform: uppercase;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.6rem;
 }
+
+/* Plusieurs postes dans une même entreprise, comme sur LinkedIn */
+.exp-role-block + .exp-role-block { margin-top: 2.5rem; }
 
 .exp-company {
     font-family: var(--f-display);
@@ -638,7 +631,6 @@ footer {
 
 @media (prefers-reduced-motion: reduce) {
     .carousel-track { transition: none; }
-    .hero-left > *, .hero-manifesto { animation: none; }
 }
 
 .carousel-dots button.active {
@@ -651,15 +643,18 @@ footer {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-.hero-left > * {
-    animation: fadeUp 0.7s ease both;
+/* Apparition au défilement (le JS ajoute .visible) */
+.js .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition-delay: var(--d, 0s);
 }
-.hero-tag    { animation-delay: 0.1s; }
-.hero-name   { animation-delay: 0.2s; }
-.hero-title  { animation-delay: 0.3s; }
-.hero-sub    { animation-delay: 0.4s; }
-.hero-cta    { animation-delay: 0.5s; }
-.hero-manifesto { animation: fadeUp 0.7s 0.4s ease both; }
+.js .reveal.visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+}
 
 /* ── RESPONSIVE ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
@@ -788,3 +783,7 @@ a.creation-card:hover { border-color: var(--steel); transform: translateY(-2px);
 .about-fill b { color: #fff; }
 
 @media (hover: none), (prefers-reduced-motion: reduce) { #about { background-attachment: scroll; } }
+
+/* Hero pleine largeur : le contenu reste aligné sur la colonne de 1100px */
+.hero-left  { padding-left:  max(var(--pad), calc((100vw - var(--max)) / 2)); }
+.hero-right { padding-right: max(var(--pad), calc((100vw - var(--max)) / 2)); }

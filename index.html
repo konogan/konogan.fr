@@ -58,6 +58,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/konogan.css">
+  <script>document.documentElement.classList.add("js")</script>
   <script src="js/konogan.js" defer></script>
 </head>
 <body>
@@ -85,13 +86,13 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-left">
-    <p class="hero-tag">Paris · Médias print · Cloud AWS</p>
-    <h1 class="hero-name">Konogan<br>Cossec</h1>
-    <p class="hero-title">Développeur Senior —<br>Systèmes Éditoriaux & Cloud</p>
-    <p class="hero-sub">
+    <p class="hero-tag reveal" style="--d:0.1s">Paris · Médias print · Cloud AWS</p>
+    <h1 class="hero-name reveal" style="--d:0.2s">Konogan<br>Cossec</h1>
+    <p class="hero-title reveal" style="--d:0.3s">Développeur Senior —<br>Systèmes Éditoriaux & Cloud</p>
+    <p class="hero-sub reveal" style="--d:0.4s">
       Production print <span>·</span> Systèmes éditoriaux <span>·</span> IA éditoriale
     </p>
-    <a href="#contact" class="hero-cta">Me contacter →</a>
+    <a href="#contact" class="hero-cta reveal" style="--d:0.5s">Me contacter →</a>
   </div>
   <div class="hero-right">
     <img
@@ -101,14 +102,10 @@
             class="hero-photo"
             onerror="this.style.display='none'"
     >
-    <blockquote class="hero-manifesto">
+    <blockquote class="hero-manifesto reveal" style="--d:0.3s">
       "Issu du terrain créatif, j'ai construit une expertise technique
       au service des métiers que je pratiquais moi-même."
     </blockquote>
-    <div class="hero-links">
-      <a href="https://linkedin.com/in/konogan" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="cv/CV_Konogan_Cossec.pdf" target="_blank" rel="noopener">Télécharger le CV</a>
-    </div>
   </div>
 </section>
 
@@ -167,94 +164,125 @@
     <p class="section-label">Parcours</p>
     <h2 class="section-title">Expérience</h2>
     <div class="exp-list">
-
       <div class="exp-item">
         <div class="exp-meta">
-          <div class="exp-dates">2019 — aujourd'hui</div>
           <div class="exp-company">CMI France</div>
           <div class="exp-location">Paris · CDI</div>
         </div>
         <div class="exp-content">
-          <div class="exp-role">Développeur Senior — Systèmes Éditoriaux & Cloud</div>
-          <div class="exp-context">ELLE, Version Femina, Marianne, Public, France Dimanche, Art & Décoration, Télé 7 Jours...</div>
-          <ul class="exp-bullets">
-            <li>Benchmark formel des solutions éditoriales du marché (WoodWing, Censhare...) ayant orienté le choix stratégique du groupe.</li>
-            <li>Migration de <strong>6 titres</strong> depuis le système maison vers <strong>WoodWing Studio & Assets</strong> — reprise du fonds documentaire : <strong>+4 millions d'assets</strong>.</li>
-            <li>Développement de plugins WoodWing sur mesure, dashboards de pilotage et UX design des outils internes DSI (Figma · XD · CSS).</li>
-            <li>Conception d'architectures <strong>AWS serverless</strong> pour l'automatisation des flux de fabrication, en collaboration avec l'équipe d'ingénierie cloud.</li>
-            <li>Étude de remplacement <strong>DALIM / Switch</strong> et développement de modules de routage et de traitement.</li>
-            <li>Plugin InDesign <strong>UXP</strong> (2026) — nouvelle génération de l'extensibilité Adobe, en remplacement du CEP.</li>
-            <li>Plugin InDesign <strong>CEP</strong> maintenu en production sur les titres non migrés — génère l'intégralité des PDFs destinés aux imprimeurs, <strong>15 ans après sa livraison</strong>.</li>
-            <li><strong>POC IA avancé</strong> : extraction et validation de contenus éditoriaux structurés (grilles jeux, textes) pour Télé 7 Jours et Télé 7 Jeux.</li>
-            <li>Newsletter interne de veille IA éditoriale diffusée aux équipes techniques et rédactionnelles.</li>
-          </ul>
+          <div class="exp-role-block">
+            <div class="exp-role">Développeur Senior — Outils &amp; Systèmes éditoriaux</div>
+            <div class="exp-dates">juil. 2026 — aujourd’hui</div>
+            <div class="exp-context">ELLE, Version Femina, Marianne, Public, France Dimanche, Art &amp; Décoration, Télé 7 Jours...</div>
+            <ul class="exp-bullets">
+              <li>Développement et évolution des systèmes éditoriaux d’un portefeuille de titres majeurs de la presse magazine française, avec une orientation renforcée vers le code, l’architecture technique et l’intégration IA.</li>
+              <li>Plugins pour <strong>WoodWing Assets</strong> : automatisation DAM, métadonnées, flux.</li>
+              <li>Plugins InDesign <strong>CEP</strong> et <strong>UXP</strong> pour la production des PDF imprimeur.</li>
+              <li>Conception et développement d’architectures <strong>AWS</strong> (Lambda, S3, SQS, EventBridge).</li>
+              <li>Développement et mise en production du <strong>prototype d’extraction et de structuration de contenus éditoriaux</strong> basé sur l’API OpenAI (GPT).</li>
+              <li>Intégration d’outils IA (OpenAI, Claude) dans les flux de développement et d’automatisation interne.</li>
+              <li>Outils internes pour les équipes rédaction, fabrication, régie et BI.</li>
+            </ul>
+          </div>
+          <div class="exp-role-block">
+            <div class="exp-role">Chef de Projet — Outils &amp; Systèmes Éditoriaux</div>
+            <div class="exp-dates">févr. 2019 — sept. 2026</div>
+            <ul class="exp-bullets">
+              <li>Pilotage et mise en œuvre des outils et systèmes éditoriaux d’un portefeuille de titres majeurs de la presse magazine française.</li>
+              <li>Benchmark formel des solutions éditoriales du marché (WoodWing, Censhare...) ayant orienté le choix stratégique du groupe.</li>
+              <li>Migration de <strong>6 titres</strong> vers <strong>WoodWing Studio &amp; Assets</strong> (DAM), avec reprise de <strong>plus de 4 millions de fichiers</strong>.</li>
+              <li>Conception et déploiement de flux automatisés de production éditoriale (print et numérique).</li>
+              <li>Développement et évolution de plugins InDesign (CEP, UXP) pour la production des PDF imprimeur — <strong>15 ans après sa livraison</strong>, le plugin CEP génère encore l’intégralité des PDF destinés aux imprimeurs sur les titres non migrés.</li>
+              <li>Conception d’architectures <strong>AWS</strong> (Lambda, S3, SQS, EventBridge) pour structurer les échanges entre systèmes.</li>
+              <li>Développement d’outils internes utilisés par les équipes rédaction, fabrication, régie et BI.</li>
+              <li>Étude de remplacement <strong>DALIM / Enfocus Switch</strong> et développement de modules de routage et de traitement.</li>
+              <li>Veille et expérimentations sur l’IA appliquée aux flux éditoriaux, avec diffusion interne via newsletter technique.</li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <div class="exp-item">
         <div class="exp-meta">
-          <div class="exp-dates">2007 — 2019</div>
           <div class="exp-company">Lagardère Active</div>
           <div class="exp-location">Levallois-Perret</div>
         </div>
         <div class="exp-content">
-          <div class="exp-role">Ingénieur · Développeur</div>
-          <div class="exp-context">Paris Match, Journal du Dimanche, ELLE, Télé 7 Jours, Première, Auto Moto, Parents et 20+ titres print</div>
-          <ul class="exp-bullets">
-            <li>Développement du <strong>plugin InDesign CEP</strong> interfacé avec le système éditorial groupe (CMIS) — génération de l'intégralité des PDFs destinés aux imprimeurs, encore actif 15 ans après.</li>
-            <li>Outil web de pilotage de transcodeurs vidéo pour la VOD groupe — banc de montage virtuel, précurseur dans son domaine.</li>
-            <li><strong>Paris Match 360</strong> : mur interactif à la rédaction (12 écrans HD · Node.js / NW.js · 24h/24).
-              <span class="exp-award">🏆 Netexplo Change 2016</span>
-            </li>
-            <li>Publication enrichie du JDD sur tablette et smartphone (design, intégration, ergonomie).</li>
-          </ul>
+          <div class="exp-role-block">
+            <div class="exp-role">Ingénieur</div>
+            <div class="exp-dates">nov. 2007 — févr. 2019</div>
+            <div class="exp-context">Paris Match, Journal du Dimanche, ELLE, Télé 7 Jours, Première, Auto Moto, Parents et 20+ titres print</div>
+            <ul class="exp-bullets">
+              <li>Conception et développement de systèmes et outils éditoriaux pour plus de 20 titres du groupe.</li>
+              <li>Développement du <strong>plugin InDesign</strong> pour la production des PDF — toujours en usage 15 ans plus tard.</li>
+              <li>Conception et développement du système éditorial interne (interfaces, ergonomie).</li>
+              <li>Outils web pour la gestion et la production de contenus.</li>
+              <li>Outil de gestion de flux vidéo pour la production VOD.</li>
+              <li>Conception et réalisation des applications <strong>iPad</strong> du JDD et de Paris Match.</li>
+              <li><strong>Paris Match 360</strong> : mur numérique interactif en rédaction (12 écrans HD · Node.js / NW.js · 24h/24).
+                <span class="exp-award">🏆 Netexplo Change 2016</span></li>
+            </ul>
+          </div>
+          <div class="exp-role-block">
+            <div class="exp-role">Webmaster / Designer</div>
+            <div class="exp-dates">oct. 2006 — nov. 2007</div>
+            <ul class="exp-bullets">
+              <li>Migration et consolidation des infrastructures web lors de la fusion Interdeco / Lagardère Publicité.</li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <div class="exp-item">
         <div class="exp-meta">
-          <div class="exp-dates">2000 — 2007</div>
           <div class="exp-company">Interdeco</div>
-          <div class="exp-location">Paris · Régie Lagardère</div>
+          <div class="exp-location">Paris · CDI · Régie Lagardère</div>
         </div>
         <div class="exp-content">
-          <div class="exp-role">Webmaster · Designer</div>
-          <div class="exp-context">interdeco.fr · i-g-a.com · ellefondation.org · ADbarometer · Pariscope...</div>
-          <ul class="exp-bullets">
-            <li>Recruté en 2000 pour développer la présence web du groupe — l'une des premières régies à se doter d'une infrastructure web complète.</li>
-            <li>Création et administration des sites intranet / extranet · CMS sur mesure · outils RH · reporting · communication interne.</li>
-            <li>2006 — 2007 : migration et consolidation des infrastructures web lors de la fusion Interdeco / Lagardère Publicité.</li>
-          </ul>
+          <div class="exp-role-block">
+            <div class="exp-role">Webmaster / Designer</div>
+            <div class="exp-dates">mars 2000 — oct. 2006</div>
+            <div class="exp-context">interdeco.fr · i-g-a.com · ellefondation.org · ADbarometer · Pariscope...</div>
+            <ul class="exp-bullets">
+              <li>Mise en place et développement de la présence web du groupe — l’une des premières régies à se doter d’une infrastructure web complète.</li>
+              <li>Création et administration des sites intranet / extranet sur CMS sur mesure · outils RH · reporting · communication interne.</li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <div class="exp-item">
         <div class="exp-meta">
-          <div class="exp-dates">1998 — 2000</div>
           <div class="exp-company">Hachette Filipacchi Régions</div>
-          <div class="exp-location">Prestation</div>
+          <div class="exp-location">Sur site · CDI</div>
         </div>
         <div class="exp-content">
-          <div class="exp-role">Maquettiste</div>
-          <div class="exp-context">Éditions régionales et internationales des grands titres du groupe</div>
-          <ul class="exp-bullets">
-            <li>Maquette et mise en page des éditions régionales de ELLE, ELLE Décoration et Paris Match.</li>
-            <li>Maquette des éditions belges de ELLE Décoration et Paris Match.</li>
-          </ul>
+          <div class="exp-role-block">
+            <div class="exp-role">Maquettiste</div>
+            <div class="exp-dates">mars 1998 — mars 2000</div>
+            <div class="exp-context">Éditions régionales et internationales des grands titres du groupe</div>
+            <ul class="exp-bullets">
+              <li>Maquette et mise en page des éditions régionales et internationales de ELLE, ELLE Décoration, Télé 7 Jours et Paris Match.</li>
+              <li>Maquette des éditions belges de ELLE Décoration et Paris Match.</li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <div class="exp-item">
         <div class="exp-meta">
-          <div class="exp-dates">1995 — 1998</div>
           <div class="exp-company">V.A.M.O.S.</div>
-          <div class="exp-location">Intermittent du spectacle</div>
+          <div class="exp-location">Paris · Freelance</div>
         </div>
         <div class="exp-content">
-          <div class="exp-role">Motion Designer · Infographiste 3D</div>
-          <ul class="exp-bullets">
-            <li>Conception graphique, motion design, infographie 3D pour projets multimédia et print.</li>
-          </ul>
+          <div class="exp-role-block">
+            <div class="exp-role">Designer — Motion Designer · Infographiste 3D</div>
+            <div class="exp-dates">juil. 1995 — mars 1998</div>
+            <ul class="exp-bullets">
+              <li>Fabrication d’animatiques 2D/3D pour films publicitaires et institutionnels.</li>
+              <li>Réalisation des séquences 3D d’un clip pour Sony Music.</li>
+            </ul>
+          </div>
         </div>
       </div>
 

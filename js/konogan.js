@@ -66,3 +66,11 @@ const navObserver = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.4 });
 document.querySelectorAll('section[id]').forEach(s => navObserver.observe(s));
+
+// Apparition au défilement
+const revealObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
